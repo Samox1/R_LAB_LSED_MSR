@@ -46,40 +46,45 @@ cat("\n"); print("--- Punkt nr 5 zadania ---")
 
 print("Skutecznoœci pe³nego drzewa ")
 ACC.PP <- table(wina$class, predict(tree, wina, type = "class"))
-print(c("Skutecznoœæ PP: ", CM.large(wina$class, predict(tree, wina, type = "class"))[1]))
+cat(c("Skutecznoœæ PP: ", CM.large(wina$class, predict(tree, wina, type = "class"))[1]))
 
-# - Kroswalidacja - #
+# --- Kroswalidacja --- #
+
+cross <- wina[sample(nrow(wina)),]
+cross$class <- factor(cross$class)
 
 k <- 5        #kroswalidacja, podzielenie iloœci wierszy przez k 
-k_rows <- nrow(losowanie) / k
+k_rows <- nrow(cross) / k
 k_rows <- as.integer(round(k_rows))
 
-wina.class <- rpart(class ~ ., wina[-(1:k_rows),], minsplit = 0, cp = 0)     #Czêœæ K1 - od -> 1:k_rows
-wina.predict <- predict(wina.class, losowanie[1:k_rows,])
-wina.CM <- CM.large(losowanie[1:k_rows,]$class, walid.lda.val$class)
+cross.class <- rpart(class ~ ., cross[-(1:k_rows),], minsplit = 0, cp = 0)     #Czêœæ K1 - od -> 1:k_rows
+cross.CM <- CM.large(cross[1:k_rows,]$class, predict(cross.class, cross[1:k_rows,], type="class"))
 
-for(x in 1:(k-2)) 
+for(x in 1:(k-2))
 {
-  class.lda <- lda(class ~ ., losowanie[-((x*k_rows+1):(x*k_rows+k_rows)),])
-  walid.lda.val <- predict(class.lda, losowanie[((x*k_rows+1):(x*k_rows+k_rows)),])
-  LDA.val <- rbind(LDA.val, CM.large(losowanie[((x*k_rows+1):(x*k_rows+k_rows)),]$class, walid.lda.val$class))
+  cross.class <- rpart(class ~ ., cross[-((x*k_rows+1):(x*k_rows+k_rows)),],minsplit = 0, cp = 0)
+  cross.CM <- rbind(cross.CM, CM.large(cross[((x*k_rows+1):(x*k_rows+k_rows)),]$class, predict(cross.class, cross[((x*k_rows+1):(x*k_rows+k_rows)),], type="class")))
 }
 
-class.lda <- lda(class ~ ., losowanie[-(((k-1)*k_rows+1):(nrow(losowanie))),])    #Czêœæ K5 - od -> (4*k_rows+1):(nrow(losowanie))
-walid.lda.val <- predict(class.lda, losowanie[((k-1)*k_rows+1):(nrow(losowanie)),])
-LDA.val <- rbind(LDA.val, CM.large(losowanie[(((k-1)*k_rows+1):(nrow(losowanie))),]$class, walid.lda.val$class))
+cross.class <- rpart(class ~ ., cross[-(((k-1)*k_rows+1):(nrow(cross))),],minsplit = 0, cp = 0)    #Czêœæ K5 - od -> (4*k_rows+1):(nrow(cross))
+cross.CM <- rbind(cross.CM, CM.large(cross[(((k-1)*k_rows+1):(nrow(cross))),]$class, predict(cross.class, cross[((k-1)*k_rows+1):(nrow(cross)),], type="class")))
 
-ifelse(k==5,(rownames(LDA.val) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LDA K5")), rownames(LDA.val) <- c(1:k))
-res.old_LDA_6 <- LDA.val
+ifelse(k==5,(rownames(cross.CM) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LDA K5")), rownames(cross.CM) <- c(1:k))
+#cross.full <- cross.CM
 
-cat("\n"); print("Uczenie na kroswalidacji - Test K: parametry LDA")
-print(res.old_LDA_6)
+cat("\n"); cat("\n"); print("Uczenie na kroswalidacji - Test K: parametry LDA")
+print(cross.CM)
 
-kap = as.numeric(gsub("[a-zA-Z ]", "",rownames(LDA.val)[which.max(LDA.val[,1])]))
-kroswalid_acc = sum(res.old_LDA_6[,5])/sum(res.old_LDA_6[,6])
+kap = as.numeric(gsub("[a-zA-Z ]", "",rownames(cross.CM)[which.max(cross.CM[,1])]))
+kroswalid_acc = sum(cross.CM[,5])/sum(cross.CM[,6])
 
 cat("\n");
-print("Prawid³owe predykcje / wszystkie dane - dla kroswalidacji: ")
-print(kroswalid_acc)
+#print("Prawid³owe predykcje / wszystkie dane - dla kroswalidacji: ")
+cat(c("Skutecznoœæ CV: ",kroswalid_acc))
+
+
+### --- Punkt 6 - za pomoc¹ tabeli cp wybraæ drzewo optymalne, narysowaæ je i porównac wyniki jego skutecznoœci z pe³nym drzewem --- ###
+cat("\n"); cat("\n"); print("--- Punkt nr 6 zadania ---")
+
 
 
