@@ -1,5 +1,5 @@
 ### LSED Lab 3 - Zadanie 2
-# Autor: Szymon Baczyñski
+# Autor: Szymon Baczyñski 270626
 
 rm(list=ls())
 library(MASS)
@@ -8,18 +8,18 @@ library(e1071)
 library(Hmisc)
 
 ### --- Punkt 1 - wczytaæ dane --- ###
-print(" "); print("--- Punkt nr 1 zadania ---"); 
+cat("\n"); print("--- Punkt nr 1 zadania ---"); 
 
 ifelse(!file.exists("wine.dat"), write.table(wina <- read.table("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data", sep=","), file="wine.dat", sep=","), wina <- read.table("wine.dat", sep=","))
 print("Wczytano dane i utworzono plik 'wine.dat' (jeœli taki nie istnia³)")
 
 ### --- Punkt 2 - nazwaæ kolumny --- ###
-print(" "); print("--- Punkt nr 2 zadania ---"); 
+cat("\n"); print("--- Punkt nr 2 zadania ---"); 
 colnames(wina) <- c("class","Alcohol","Malic acid","Ash","Alcalinity of ash","Magnesium","Total phenols","Flavanoids","Nonflavanoid phenols","Proanthocyanins","Color intensity","Hue","OD280/OD315 of diluted wines", "Proline")
 print("Nazwano kolumny wed³ug pliku pomocniczego")
 
 ### --- Punkt 3 - parametry klasyfikatorów LDA, QDA i NB na pe³nym zbiorze --- ###
-print(" "); print("--- Punkt nr 3 zadania ---"); 
+cat("\n"); print("--- Punkt nr 3 zadania ---"); 
 
 wina$class <- factor(wina$class)
 
@@ -46,23 +46,6 @@ CM.large <- function(org.class, pred.class) {
   return(c(ACC = round(ACC,4), TP1 = TP1, TP2 = TP2, TP3 = TP3, GSUM = gsums, ALL = sum(CM), row.names = NULL))
 }
 
-CM.values <- function(org.class, pred.posterior, threshold) {
-  
-  pred.class <- factor(ifelse(pred.posterior >= threshold, 2, 1))
-  TP <- sum(pred.class == 2 & org.class == 2)
-  TN <- sum(pred.class == 1 & org.class == 1)
-  sum.neg <- sum(org.class == 1)
-  sum.pos <- sum(org.class == 2)
-  TPR <- TP / sum.pos
-  FPR <- 1 - TN / sum.neg
-  return(c(FPR,TPR))
-} 
-
-get.roc.values <- function(class, posterior) {
-  progi <- c(-Inf, sort(unique(posterior)), +Inf)
-  z <- t(sapply(1:length(progi), function(i) CM.values(class, posterior, progi[i])))
-  return(z)
-} 
 ### --- Funkcje ---- ### ### --- Funkcje ---- ### ### --- Funkcje ---- ### ### --- Funkcje ---- ###
 
 # Powtórne podstawienie
@@ -77,12 +60,12 @@ res.old <- rbind(res.old, CM.large(wina$class, wina.nb.old))
 rownames(res.old) <- c("LDA ++", "QDA ++", "NB  ++") 
 res.oldall <- res.old
 
-print(" "); print("Uczenie na wszystkich kolumnach")
+cat("\n"); print("Uczenie na wszystkich kolumnach")
 print(res.old)
 
 
 ### --- Punkt 4 - ograniczyc siê do 2 pierwszych, 5 pierwszych i 10 pierwszych sk³adowych i sprawdziæ skutecznoœci klasyfikatorów --- ###
-print(" "); print("--- Punkt nr 4 zadania ---");
+cat("\n"); print("--- Punkt nr 4 zadania ---");
 # Na 2 pierwszych kolumnach
 
 # Trenowanie klasyfikatorów na PU
@@ -142,13 +125,12 @@ res.old10 <- res.old
 #print(res.old)
 
 res.all <- rbind(res.old2, res.old5, res.old10, res.oldall)
-print(" "); print("Kumulacja danych")
+cat("\n"); print("Kumulacja danych")
 print(res.all)
 
 
 ### --- Punkt 5 - ograniczyæ siê do 2 pierwszych zmiennych, podzieliæ zbiór (PU/PW/PT) 50/25/25 i w ten sposób dokonaæ wyboru spoœród LDA, QDA, NB --- ###
-print(" "); print("--- Punkt nr 5 zadania ---");
-#library(dplyr)
+cat("\n"); print("--- Punkt nr 5 zadania ---");
 
 bound_train <- floor((nrow(wina)/2))         
 bound_walid <- floor((nrow(wina)/4))
@@ -161,14 +143,6 @@ train <- losowanie[1:bound_train,]
 walid <- losowanie[(bound_train+1):(bound_train+bound_walid),]
 test <- losowanie[(bound_train+bound_walid+1):nrow(losowanie),]
 
-### Metoda 2 - usuwanie losowania co próbkê (nauka usuwania wierszy w ró¿ny sposób)
-#train <- losowanie[1:bound_train,] 
-##losowanie <- losowanie[-as.numeric(rownames(train)),]
-#losowanie <- anti_join(losowanie, train)
-#walid <- losowanie[1:bound_walid,]
-#losowanie <- losowanie[-as.numeric(rownames(walid)),]
-#test <- losowanie[1:bound_test,]
-
 ### Uczenie na tablicy TRAIN i macierz pomy³ki dla powtórnego podstawienia.
 # Trenowanie klasyfikatorów na PU
 class.lda <- lda(class ~ ., train)
@@ -179,7 +153,6 @@ class.nb <- naiveBayes(class ~ ., train)
 train.lda.old <- predict(class.lda, train)
 train.qda.old <- predict(class.qda, train)
 train.nb.old <- predict(class.nb, train)
-train.nb.old.p <- predict(class.nb, walid, type = "raw")
 
 # G³ówne wartoœci z macierzy pomy³ek dla powtórnego podstawienia
 res.old <- CM.large(train$class, train.lda.old$class)
@@ -204,13 +177,13 @@ res.val <- rbind(res.val, CM.large(walid$class, walid.nb.val))
 rownames(res.val) <- c("LDA", "QDA", "NB")
 res.old_walid <- res.val
 
-print(" "); print("Uczenie na TRAIN i sprawdzenie na WALID: parametry klasyfikatorów")
+cat("\n"); print("Uczenie na TRAIN i sprawdzenie na WALID: parametry klasyfikatorów")
 print(res.old_walid)
 
 ### Sprawdzenie nauczonych klasyfikatorów na próbie testowej
 # Predykcja na zbiorze testowym
 wygrana <- rownames(res.val)[which.max(res.val[,1])]
-print(" "); print("Wygra³o tym razem: ")
+cat("\n"); print("Wygra³o tym razem: ")
 print(wygrana)
 
 
@@ -231,7 +204,7 @@ if(wygrana == "NB"){
 res.old_test <- res.test
 rownames(res.old_test) <- c(wygrana)
 
-print(" "); print("Uczenie na PU (TRAIN) i sprawdzenie na PT (próbce TEST): ")
+cat("\n"); print("Uczenie na PU (TRAIN) i sprawdzenie na PT (próbce TEST): ")
 #print(wygrana)
 #print(" ");
 print(res.old_test)
@@ -240,7 +213,7 @@ print(res.old_test)
 ### ---
 ### --- Punkt 6 - ograniczyæ siê do 2 pierwszych zmiennych, wykonaæ kroswalidacjê w przypadku LDA, porównac z poprzednim punktem oraz powtórnym podstawieniem. 
 ### ---
-print(" "); print("--- Punkt nr 6 zadania ---");
+cat("\n"); print("--- Punkt nr 6 zadania ---");
 
 # ramka "losowanie" ma ju¿ wymieszane rzeczy
 # teraz kroswalidacja dla LDA
@@ -248,7 +221,7 @@ print(" "); print("--- Punkt nr 6 zadania ---");
 
 k <- 5        #kroswalidacja, podzielenie iloœci wierszy przez k 
 k_rows <- nrow(losowanie) / k
-k_rows <- as.integer(k_rows)
+k_rows <- as.integer(round(k_rows))
 
 ## Ogólny wzór na pêtle kroswalidacji:
 #class.lda <- lda(class ~ ., losowanie[-((x*k_rows+1):(x*k_rows+k_rows)),])
@@ -271,21 +244,23 @@ class.lda <- lda(class ~ ., losowanie[-(((k-1)*k_rows+1):(nrow(losowanie))),])  
 walid.lda.val <- predict(class.lda, losowanie[((k-1)*k_rows+1):(nrow(losowanie)),])
 LDA.val <- rbind(LDA.val, CM.large(losowanie[(((k-1)*k_rows+1):(nrow(losowanie))),]$class, walid.lda.val$class))
 
-rownames(LDA.val) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LDA K5")
+ifelse(k==5,(rownames(LDA.val) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LDA K5")), rownames(LDA.val) <- c(1:k))
 res.old_LDA_6 <- LDA.val
 
-print(" "); print("Uczenie na kroswalidacji - Test K1: parametry LDA")
+cat("\n"); print("Uczenie na kroswalidacji - Test K: parametry LDA")
 print(res.old_LDA_6)
 
 kap = as.numeric(gsub("[a-zA-Z ]", "",rownames(LDA.val)[which.max(LDA.val[,1])]))
 kroswalid_acc = sum(res.old_LDA_6[,5])/sum(res.old_LDA_6[,6])
 
-print(" ");
+cat("\n");
 print("Prawid³owe predykcje / wszystkie dane - dla kroswalidacji: ")
 print(kroswalid_acc)
+print("Najlepsza predykcja - dla kroswalidacji: ")
+print(res.old_LDA_6[kap,1])
 
 LDAvs <- rbind(c(round(res.old_train[1,1],4), round(res.old_walid[1,1],4), round(kroswalid_acc,4)))
 colnames(LDAvs) <- c("PP", "WALID", "CV")
 rownames(LDAvs) <- c("ACC")
 
-print(" "); print(LDAvs)
+cat("\n"); print(LDAvs)

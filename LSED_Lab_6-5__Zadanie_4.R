@@ -45,4 +45,40 @@ CM.large <- function(org.class, pred.class) {
 }
 
 ACC.PP <- table(wina$class, predict(tree, wina, type = "class"))
-print("Skutecznoœæ PP:"); print(CM.large(wina$class, predict(tree, wina, type = "class")))
+print(c("Skutecznoœæ PP: ", CM.large(wina$class, predict(tree, wina, type = "class"))[1]))
+
+# - Kroswalidacja - #
+k <- 5        #kroswalidacja, podzielenie iloœci wierszy przez k 
+k_rows <- nrow(losowanie) / k
+k_rows <- as.integer(k_rows)
+
+class.lda <- lda(class ~ ., losowanie[-(1:k_rows),])                   #Czêœæ K1 - od -> 1:k_rows
+walid.lda.val <- predict(class.lda, losowanie[1:k_rows,])
+LDA.val <- CM.large(losowanie[1:k_rows,]$class, walid.lda.val$class)
+
+for(x in 1:(k-2)) 
+{
+  class.lda <- lda(class ~ ., losowanie[-((x*k_rows+1):(x*k_rows+k_rows)),])
+  walid.lda.val <- predict(class.lda, losowanie[((x*k_rows+1):(x*k_rows+k_rows)),])
+  LDA.val <- rbind(LDA.val, CM.large(losowanie[((x*k_rows+1):(x*k_rows+k_rows)),]$class, walid.lda.val$class))
+}
+
+class.lda <- lda(class ~ ., losowanie[-(((k-1)*k_rows+1):(nrow(losowanie))),])    #Czêœæ K5 - od -> (4*k_rows+1):(nrow(losowanie))
+walid.lda.val <- predict(class.lda, losowanie[((k-1)*k_rows+1):(nrow(losowanie)),])
+LDA.val <- rbind(LDA.val, CM.large(losowanie[(((k-1)*k_rows+1):(nrow(losowanie))),]$class, walid.lda.val$class))
+
+rownames(LDA.val) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LDA K5")
+res.old_LDA_6 <- LDA.val
+
+print(" "); print("Uczenie na kroswalidacji - Test K1: parametry LDA")
+print(res.old_LDA_6)
+
+kap = as.numeric(gsub("[a-zA-Z ]", "",rownames(LDA.val)[which.max(LDA.val[,1])]))
+kroswalid_acc = sum(res.old_LDA_6[,5])/sum(res.old_LDA_6[,6])
+
+print(" ");
+print("Prawid³owe predykcje / wszystkie dane - dla kroswalidacji: ")
+print(kroswalid_acc)
+
+
+
