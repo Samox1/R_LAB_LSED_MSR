@@ -106,6 +106,6 @@ cat(c("Skutecznoœæ Drzewa Optymalnego",(CM.large(wina$class,predict(tree1, wina,
 ### --- Punkt 7 - stworzyæ drzewo dla pierwszych: dwóch, trzech, czterach, itd. zmiennych - za ka¿dym razem wyznaczyæ drzewo optymalne --- ###
 cat("\n"); print("--- Punkt nr 7 zadania ---")
 
-
-
+tree_all <- lapply(2:12, function(i) rpart(class ~., wina[,1:i]))
+cp_all <- lapply(1:(tree_all), function(i) best.cp(tree_all[[i]]$cptable))
 
