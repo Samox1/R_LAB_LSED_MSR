@@ -78,13 +78,16 @@ print(cross.CM)
 kap = as.numeric(gsub("[a-zA-Z ]", "",rownames(cross.CM)[which.max(cross.CM[,1])]))
 kroswalid_acc = sum(cross.CM[,5])/sum(cross.CM[,6])
 
-cat("\n");
-#print("Prawid³owe predykcje / wszystkie dane - dla kroswalidacji: ")
-cat(c("Skutecznoœæ CV: ",kroswalid_acc))
+cat("\n"); cat(c("Skutecznoœæ CV: ",kroswalid_acc))
 
 
 ### --- Punkt 6 - za pomoc¹ tabeli cp wybraæ drzewo optymalne, narysowaæ je i porównac wyniki jego skutecznoœci z pe³nym drzewem --- ###
 cat("\n"); cat("\n"); print("--- Punkt nr 6 zadania ---")
 
+best.cp <- function(cptable){
+  as.numeric(gsub("[a-zA-Z ]", "",rownames(cptable)[which.min(cptable[,1])]))
+}
 
+best.tree <- best.cp(tree$cptable)
+print(best.tree)
 
