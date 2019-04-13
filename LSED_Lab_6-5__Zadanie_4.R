@@ -45,8 +45,7 @@ print("Narysowano drzewo")
 cat("\n"); print("--- Punkt nr 5 zadania ---")
 
 print("Skutecznoœci pe³nego drzewa ")
-ACC.PP <- table(wina$class, predict(tree, wina, type = "class"))
-cat(c("Skutecznoœæ PP: ", CM.large(wina$class, predict(tree, wina, type = "class"))[1]))
+cat(c("Skutecznoœæ PP: ", ACC.PP <- CM.large(wina$class, predict(tree, wina, type = "class"))[1]))
 
 # --- Kroswalidacja --- #
 
@@ -70,13 +69,12 @@ cross.class <- rpart(class ~ ., cross[-(((k-1)*k_rows+1):(nrow(cross))),],minspl
 cross.CM <- rbind(cross.CM, CM.large(cross[(((k-1)*k_rows+1):(nrow(cross))),]$class, predict(cross.class, cross[((k-1)*k_rows+1):(nrow(cross)),], type="class")))
 
 ifelse(k==5,(rownames(cross.CM) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LDA K5")), rownames(cross.CM) <- c(1:k))
-#cross.full <- cross.CM
 
-cat("\n"); cat("\n"); print("Uczenie na kroswalidacji - Test K: parametry LDA")
-print(cross.CM)
+#cat("\n"); cat("\n"); print("Uczenie na kroswalidacji")
+#print(cross.CM)
 
 kap = as.numeric(gsub("[a-zA-Z ]", "",rownames(cross.CM)[which.max(cross.CM[,1])]))
-kroswalid_acc = sum(cross.CM[,5])/sum(cross.CM[,6])
+kroswalid_acc = sum(cross.CM[,"GSUM"])/sum(cross.CM[,"ALL"])
 
 cat("\n"); cat(c("Skutecznoœæ CV: ",kroswalid_acc))
 
@@ -85,9 +83,29 @@ cat("\n"); cat(c("Skutecznoœæ CV: ",kroswalid_acc))
 cat("\n"); cat("\n"); print("--- Punkt nr 6 zadania ---")
 
 best.cp <- function(cptable){
-  as.numeric(gsub("[a-zA-Z ]", "",rownames(cptable)[which.min(cptable[,1])]))
+  mincp <- as.numeric(gsub("[a-zA-Z ]", "",rownames(cptable)[which.min(cptable[,"xerror"])]))
+  xerr.max <- cptable[mincp,"xerror"] + cptable[mincp,"xstd"]
+  cp.row <- as.numeric(gsub("[a-zA-Z ]", "",rownames(cptable)[which.max(cptable[,"xerror"] < xerr.max)]))
+  cp <- cptable[cp.row,"CP"]
+  return(cp)
 }
 
+print("Wybranie Drzewa Optymalnego (best CP)")
 best.tree <- best.cp(tree$cptable)
-print(best.tree)
+cat(c("Best CP: ",best.tree)); cat("\n");cat("\n")
+tree1 <- prune(tree, cp=best.tree)
+
+rpart.plot(tree1, type = 1, extra = 1)
+print("Narysowanie drzewa optymalnego")
+print("Porównanie skutecznoœci:")
+cat(c("Skutecznoœæ PP: ",ACC.PP)); cat("\n")
+cat(c("Skutecznoœæ CV: ",kroswalid_acc)); cat("\n")
+cat(c("Skutecznoœæ Drzewa Optymalnego",(CM.large(wina$class,predict(tree1, wina, type = "class"))["ACC"]))); cat("\n")
+
+
+### --- Punkt 7 - stworzyæ drzewo dla pierwszych: dwóch, trzech, czterach, itd. zmiennych - za ka¿dym razem wyznaczyæ drzewo optymalne --- ###
+cat("\n"); print("--- Punkt nr 7 zadania ---")
+
+
+
 
