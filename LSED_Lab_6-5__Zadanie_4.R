@@ -73,7 +73,6 @@ ifelse(k==5,(rownames(cross.CM) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LD
 #cat("\n"); cat("\n"); print("Uczenie na kroswalidacji")
 #print(cross.CM)
 
-kap = as.numeric(gsub("[a-zA-Z ]", "",rownames(cross.CM)[which.max(cross.CM[,1])]))
 kroswalid_acc = sum(cross.CM[,"GSUM"])/sum(cross.CM[,"ALL"])
 
 cat("\n"); cat(c("Skutecznoœæ CV: ",kroswalid_acc))
@@ -105,8 +104,9 @@ cat(c("Skutecznoœæ Drzewa Optymalnego",(CM.large(wina$class,predict(tree1, wina,
 
 ### --- Punkt 7 - stworzyæ drzewo dla pierwszych: dwóch, trzech, czterach, itd. zmiennych - za ka¿dym razem wyznaczyæ drzewo optymalne --- ###
 cat("\n"); print("--- Punkt nr 7 zadania ---")
+max_col = 14
 
-tree_all <- lapply(2:12, function(i) rpart(class ~., wina[,1:i]))
+tree_all <- lapply(3:max_col, function(i) rpart(class ~., wina[,1:i]))
 cp_all <- lapply(1:length(tree_all), function(i) best.cp(tree_all[[i]]$cptable))
 tree_all_opt <- lapply(1:length(tree_all), function(i) prune(tree_all[[i]], cp=cp_all[[i]]))
 print("Wyznaczenie optymalnych drzew dla pierwszych: 2,3,4...12 zmiennych")
@@ -116,12 +116,12 @@ print("Wyznaczenie optymalnych drzew dla pierwszych: 2,3,4...12 zmiennych")
 cat("\n"); print("--- Punkt nr 8 zadania ---")
 
 ACC_all <- lapply(1:length(tree_all_opt),function(i) CM.large(wina$class,predict(tree_all_opt[[i]], wina, type = "class"))["ACC"])
-plot(2:(length(tree_all_opt)+1), ACC_all, type="b", xlab = sprintf("Iloœæ u¿ytych zmiennych: 2 ~ %0.f", (length(tree_all_opt)+1)), ylab = "Skutecznoœæ Optymalnych Drzew",pch=19, col="blue")
+plot(2:(length(tree_all_opt)+1), ACC_all, type="b", xlab = sprintf("Iloœæ u¿ytych zmiennych: 2 ~ %0.f", (length(tree_all_opt))+1), ylab = "Skutecznoœæ Optymalnych Drzew",pch=19, col="blue")
 axis(side=1, at=c(2:(length(tree_all_opt)+1)))
 print("Wyliczono skutecznoœci optymalnych drzew")
 
 N_diff <- lapply(1:length(tree_all),function(i) max(tree_all[[i]]$cptable[,"nsplit"]) - max(tree_all_opt[[i]]$cptable[,"nsplit"]))
-plot(2:(length(tree_all_opt)+1), N_diff, type="b", xlab = sprintf("Iloœæ u¿ytych zmiennych: 2 ~ %0.f", (length(tree_all_opt)+1)), ylab = "Ró¿nica drzewa pe³nego i optymalnego",pch=19, col="blue")
+plot(2:(length(tree_all_opt)+1), N_diff, type="b", xlab = sprintf("Iloœæ u¿ytych zmiennych: 2 ~ %0.f", (length(tree_all_opt))+1), ylab = "Ró¿nica drzewa pe³nego i optymalnego",pch=19, col="blue")
 axis(side=1, at=c(2:(length(tree_all_opt)+1)))
 print("Wyliczono ró¿nice rozmiaru drzewa pe³nego i optymalnego")
 
