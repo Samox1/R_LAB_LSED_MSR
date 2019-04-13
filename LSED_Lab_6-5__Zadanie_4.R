@@ -107,5 +107,21 @@ cat(c("Skutecznoœæ Drzewa Optymalnego",(CM.large(wina$class,predict(tree1, wina,
 cat("\n"); print("--- Punkt nr 7 zadania ---")
 
 tree_all <- lapply(2:12, function(i) rpart(class ~., wina[,1:i]))
-cp_all <- lapply(1:(tree_all), function(i) best.cp(tree_all[[i]]$cptable))
+cp_all <- lapply(1:length(tree_all), function(i) best.cp(tree_all[[i]]$cptable))
+tree_all_opt <- lapply(1:length(tree_all), function(i) prune(tree_all[[i]], cp=cp_all[[i]]))
+print("Wyznaczenie optymalnych drzew dla pierwszych: 2,3,4...12 zmiennych")
+
+
+### --- Punkt 8 - wykreœliæ skutecznoœæ drzewa w funkcji liczby u¿ytych zmiennych, a tak¿e ró¿nice rozmiaru drzewa pe³nego i optymalnego --- ###
+cat("\n"); print("--- Punkt nr 8 zadania ---")
+
+ACC_all <- lapply(1:length(tree_all_opt),function(i) CM.large(wina$class,predict(tree_all_opt[[i]], wina, type = "class"))["ACC"])
+plot(2:(length(tree_all_opt)+1), ACC_all, type="b", xlab = sprintf("Iloœæ u¿ytych zmiennych: 2 ~ %0.f", (length(tree_all_opt)+1)), ylab = "Skutecznoœæ Optymalnych Drzew",pch=19, col="blue")
+axis(side=1, at=c(2:(length(tree_all_opt)+1)))
+print("Wyliczono skutecznoœci optymalnych drzew")
+
+N_diff <- lapply(1:length(tree_all),function(i) max(tree_all[[i]]$cptable[,"nsplit"]) - max(tree_all_opt[[i]]$cptable[,"nsplit"]))
+plot(2:(length(tree_all_opt)+1), N_diff, type="b", xlab = sprintf("Iloœæ u¿ytych zmiennych: 2 ~ %0.f", (length(tree_all_opt)+1)), ylab = "Ró¿nica drzewa pe³nego i optymalnego",pch=19, col="blue")
+axis(side=1, at=c(2:(length(tree_all_opt)+1)))
+print("Wyliczono ró¿nice rozmiaru drzewa pe³nego i optymalnego")
 
