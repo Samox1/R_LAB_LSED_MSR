@@ -81,16 +81,22 @@ cat("\n"); cat(c("Skutecznoœæ CV: ",kroswalid_acc))
 ### --- Punkt 6 - za pomoc¹ tabeli cp wybraæ drzewo optymalne, narysowaæ je i porównac wyniki jego skutecznoœci z pe³nym drzewem --- ###
 cat("\n"); cat("\n"); print("--- Punkt nr 6 zadania ---")
 
-best.cp <- function(cptable){
-  mincp <- as.numeric(gsub("[a-zA-Z ]", "",rownames(cptable)[which.min(cptable[,"xerror"])]))
-  xerr.max <- cptable[mincp,"xerror"] + cptable[mincp,"xstd"]
-  cp.row <- as.numeric(gsub("[a-zA-Z ]", "",rownames(cptable)[which.max(cptable[,"xerror"] < xerr.max)]))
-  cp <- cptable[cp.row,"CP"]
-  return(cp)
+# best.cp <- function(tree){
+#   mincp <- as.numeric(gsub("[a-zA-Z ]", "",rownames(tree$cptable)[which.min(tree$cptable[,"xerror"])]))
+#   xerr.max <- tree$cptable[mincp,"xerror"] + tree$cptable[mincp,"xstd"]
+#   cp.row <- as.numeric(gsub("[a-zA-Z ]", "",rownames(tree$cptable)[which.max(tree$cptable[,"xerror"] < xerr.max)]))
+#   cp <- tree$cptable[cp.row,"CP"]
+#   return(cp)
+# }
+
+best.cp <- function(tree){
+  mincp <- which.min(tree$cptable[,4])
+  cp.row <- which.max(tree$cptable[,4] < tree$cptable[mincp,4] + tree$cptable[mincp,5])
+  return(tree$cptable[cp.row,1])
 }
 
 print("Wybranie Drzewa Optymalnego (best CP)")
-best.tree <- best.cp(tree$cptable)
+best.tree <- best.cp(tree)
 cat(c("Best CP: ",best.tree)); cat("\n");cat("\n")
 tree1 <- prune(tree, cp=best.tree)
 
@@ -107,7 +113,7 @@ cat("\n"); print("--- Punkt nr 7 zadania ---")
 max_col = 14
 
 tree_all <- lapply(3:max_col, function(i) rpart(class ~., wina[,1:i], minsplit = 0, cp = 0))
-cp_all <- lapply(1:length(tree_all), function(i) best.cp(tree_all[[i]]$cptable))
+cp_all <- lapply(1:length(tree_all), function(i) best.cp(tree_all[[i]]))
 tree_all_opt <- lapply(1:length(tree_all), function(i) prune(tree_all[[i]], cp=cp_all[[i]]))
 print("Wyznaczenie optymalnych drzew dla pierwszych: 2,3,4...12 zmiennych")
 
