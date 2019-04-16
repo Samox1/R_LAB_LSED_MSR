@@ -171,3 +171,139 @@ abline(h = err0, lty = 2)
 abline(h = err1)
 abline(h = err2, col = "red") 
 
+
+
+library(adabag)
+
+# Algorytm bagging
+do.bag <- function(data, newdata, n) {
+  
+  bag <- bagging(class ~ ., data = data, mfinal = n)
+  bag.pred <- predict.bagging(bag, newdata = newdata)
+  
+  return(bag.pred$error)
+}
+
+# 2 realizacje bagging dla PU i PT
+tab.bag <- sapply(vals, function(i) replicate(2, do.bag(data, data, i)))
+tab.bag.new <- sapply(vals, function(i) replicate(2, do.bag(data, newdata, i)))
+
+# Wyznaczanie wartoœci œrednich i odchylenia dla PU
+tab.bag.m <- apply(tab.bag, 2, mean)
+tab.bag.s <- apply(tab.bag, 2, sd)
+
+# Wyznaczanie wartoœci œrednich i odchylenia dla PT
+tab.bag.new.m <- apply(tab.bag.new, 2, mean)
+tab.bag.new.s <- apply(tab.bag.new, 2, sd)
+
+# Tworzenie wykresów
+errbar(vals, tab.bag.m, tab.bag.m + tab.bag.s, tab.bag.m - tab.bag.s, ylim = c(0.2, 0.6), xlab = "Liczba drzew", ylab = "B³ad klasyfikacji")
+errbar(vals, tab.bag.new.m, tab.bag.new.m + tab.bag.new.s, tab.bag.new.m - tab.bag.new.s, add = T, col = "red", errbar.col = "red")
+
+abline(h = err0, lty = 2)
+abline(h = err1)
+abline(h = err2, col = "red") 
+
+
+
+### --- BOOSTING --- ### ----------------------------------
+
+
+# Algorytm boosting
+do.boost <- function(data, newdata, n) {
+  
+  boost <- boosting(class ~ ., data = data, mfinal = n, control=rpart.control(maxdepth = 1))
+  boost.pred <- predict.boosting(boost, newdata = newdata)
+  
+  return(boost.pred$error)
+}
+
+# 2 realizacje boosting dla PU i PT
+tab.boost <- sapply(vals, function(i) replicate(2, do.boost(data, data, i)))
+tab.boost.new <- sapply(vals, function(i) replicate(2, do.boost(data, newdata, i)))
+
+# Wyznaczanie wartoœci œrednich i odchylenia dla PU
+tab.boost.m <- apply(tab.boost, 2, mean)
+tab.boost.s <- apply(tab.boost, 2, sd)
+
+# Wyznaczanie wartoœci œrednich i odchylenia dla PT
+tab.boost.new.m <- apply(tab.boost.new, 2, mean)
+tab.boost.new.s <- apply(tab.boost.new, 2, sd)
+
+# Tworzenie wykresów
+errbar(vals, tab.boost.m, tab.boost.m + tab.boost.s, tab.boost.m - tab.boost.s, ylim = c(0.2, 0.6), xlab = "Liczba drzew", ylab = "B³ad klasyfikacji")
+errbar(vals, tab.boost.new.m, tab.boost.new.m + tab.boost.new.s, tab.boost.new.m - tab.boost.new.s, add = T, col = "red", errbar.col = "red")
+
+abline(h = err0, lty = 2)
+abline(h = err1)
+abline(h = err2, col = "red") 
+
+
+
+### --- LASY LOSOWE --- ### ------------------------------
+
+library(randomForest)
+
+# Algorytm lasu losowego
+do.rf <- function(data, newdata, n) {
+  
+  rf <- randomForest(class ~ ., data = data, ntree = n)
+  rf.pred <- predict(rf, newdata = newdata)
+  
+  return(err.rate(newdata$class, rf.pred))
+}
+
+# Parametry dla 10-wymiarowego rozk³adu Gaussa
+n1 <- 50
+n2 <- 50
+
+m1 <- rep(-1, 10)
+m2 <- rep(1, 10)
+
+S1 <- matrix(0, 10, 10)
+diag(S1) <- 10
+S2 <- S1
+
+# Ustawienie ziarna dla losowania danych
+set.seed(1290)
+
+data <- draw.data.gauss(S1, S2, m1, m2, n1, n2)
+newdata <- draw.data.gauss(S1, S2, m1, m2, n1, n2)
+
+colnames(data) <- c("X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "X10", "class")
+colnames(newdata) <- c("X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8", "X9", "X10", "class")
+
+vals <- c(1, 2, 5, 10, 20, 50, 100, 200, 500, 1000)
+
+# 10 realizacji lasu losowego dla PU i PT
+tab.rf <- sapply(vals, function(i) replicate(10, do.rf(data, data, i)))
+tab.rf.new <- sapply(vals, function(i) replicate(10, do.rf(data, newdata, i)))
+
+# Wyznaczanie wartoœci œrednich i odchylenia dla PU
+tab.rf.m <- apply(tab.rf, 2, mean)
+tab.rf.s <- apply(tab.rf, 2, sd)
+
+# Wyznaczanie wartoœci œrednich i odchylenia dla PT
+tab.rf.new.m <- apply(tab.rf.new, 2, mean)
+tab.rf.new.s <- apply(tab.rf.new, 2, sd)
+
+# Tworzenie pe³nego drzewa
+tree0 <- rpart(class ~ ., data, minsplit = 0, minbucket = 0, cp = 0)
+
+# Przycinanie drzewa
+tree <- prune(tree0, cp = choose.cp(tree0))
+
+err0 <- err.rate(newdata$class, predict(tree0, newdata, type = "class"))
+
+err1 <- err.rate(data$class, predict(tree, data, type = "class"))
+err2 <- err.rate(newdata$class, predict(tree, newdata, type = "class"))
+
+# Tworzenie wykresów
+errbar(vals, tab.rf.m, tab.rf.m + tab.rf.s, tab.rf.m - tab.rf.s, ylim = c(0, 0.6), xlab = "Liczba drzew", ylab = "B³ad klasyfikacji", log="x")
+errbar(vals, tab.rf.new.m, tab.rf.new.m + tab.rf.new.s, tab.rf.new.m - tab.rf.new.s, add = T, col = "red", errbar.col = "red")
+
+abline(h = err0, lty = 2)
+abline(h = err1)
+abline(h = err2, col = "red")
+
+title("Las losowy") 
