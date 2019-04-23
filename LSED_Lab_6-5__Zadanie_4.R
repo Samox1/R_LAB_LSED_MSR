@@ -105,7 +105,7 @@ print("Narysowanie drzewa optymalnego")
 print("Porównanie skutecznoœci:")
 cat(c("Skutecznoœæ PP: ",ACC.PP)); cat("\n")
 cat(c("Skutecznoœæ CV: ",kroswalid_acc)); cat("\n")
-cat(c("Skutecznoœæ Drzewa Optymalnego",(CM.large(wina$class,predict(tree1, wina, type = "class"))["ACC"]))); cat("\n")
+cat(c("Skutecznoœæ Drzewa Optymalnego: ",(CM.large(wina$class,predict(tree1, wina, type = "class"))["ACC"]))); cat("\n")
 
 
 ### --- Punkt 7 - stworzyæ drzewo dla pierwszych: dwóch, trzech, czterach, itd. zmiennych - za ka¿dym razem wyznaczyæ drzewo optymalne --- ###
