@@ -1,4 +1,4 @@
-### LSED - Zadanie 4 - LAB nr 5
+### LSED - Zadanie 4 - LAB nr 5-6
 # Autor: Szymon Baczyñski
 
 rm(list=ls())
@@ -74,7 +74,6 @@ ifelse(k==5,(rownames(cross.CM) <- c("LDA K1", "LDA K2", "LDA K3", "LDA K4", "LD
 #print(cross.CM)
 
 kroswalid_acc = sum(cross.CM[,"GSUM"])/sum(cross.CM[,"ALL"])
-
 cat("\n"); cat(c("Skutecznoœæ CV: ",kroswalid_acc))
 
 
@@ -110,8 +109,8 @@ cat(c("Skutecznoœæ Drzewa Optymalnego: ",(CM.large(wina$class,predict(tree1, win
 
 ### --- Punkt 7 - stworzyæ drzewo dla pierwszych: dwóch, trzech, czterach, itd. zmiennych - za ka¿dym razem wyznaczyæ drzewo optymalne --- ###
 cat("\n"); print("--- Punkt nr 7 zadania ---")
-max_col = 14
 
+max_col = length(wina)
 tree_all <- lapply(3:max_col, function(i) rpart(class ~., wina[,1:i], minsplit = 0, cp = 0))
 cp_all <- lapply(1:length(tree_all), function(i) best.cp(tree_all[[i]]))
 tree_all_opt <- lapply(1:length(tree_all), function(i) prune(tree_all[[i]], cp=cp_all[[i]]))
