@@ -64,18 +64,17 @@ LDAbagging.own <- function(data, N) {
   # Dane: losowanie z oryginalnej próby
   dane <- replicate(N, sample(1:nrow(data), rep = T))
   # tworzenie klasyfikatorów LDA
-  # LDA <- lda(class ~ .,data)
   LDA <- lapply(1:N, function(i) lda(class ~ ., data=data[dane[,i],]))
-  # tmp <- list(dane = dane)
-  # tmp$N <- N
-  # tmp$data <- data
-  # tmp$LDA <- LDA
-  # tmp1 <- bagging.own.pred(tmp, data)
-  # tmp$LDA.class <- tmp1$LDA.class
-  # tmp$votes <- tmp1$votes
-  # tmp$class <- tmp1$class
-  # tmp$err <- tmp1$err
-  # return(tmp)
+  tmp <- list(dane = dane)
+  tmp$N <- N
+  tmp$data <- data
+  tmp$LDA <- LDA
+  tmp1 <- bagging.own.pred(tmp, data)
+  tmp$LDA.class <- tmp1$LDA.class
+  tmp$votes <- tmp1$votes
+  tmp$class <- tmp1$class
+  tmp$err <- tmp1$err
+  return(tmp)
 }
 
 # Funkcja do przeprowadzania przewidywania za pomoca baggingu LDA
