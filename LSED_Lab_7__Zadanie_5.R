@@ -13,11 +13,11 @@ library(rpart)
 library(rpart.plot)
 
 Irys = datasets::iris
+Iris = datasets::iris
 
 colnames(Irys)[colnames(Irys)=="Species"] <- "class"
 
-Irys$class <- ifelse((Irys$class=="setosa"), 1, 
-              ifelse(Irys$class=="versicolor", 2, 3))
+Irys$class <- ifelse((Irys$class=="setosa"), 1, ifelse(Irys$class=="versicolor", 2, 3))
 Irys$class <- factor(Irys$class)
 
 
@@ -62,19 +62,20 @@ bagging.own.pred <- function(bag, data) {
 # Funkcja do przeprowadzanie procedury bagging LDA
 LDAbagging.own <- function(data, N) {
   # Dane: losowanie z oryginalnej próby
-  dane <- replicate(N, sample(1:nrow(data), rep = T))
+  dane <- replicate(N, sample(seq(1:nrow(data)),nrow(data), rep = T))
+  
   # tworzenie klasyfikatorów LDA
-  LDA <- lapply(1:N, function(i) lda(class ~ ., data=data[dane[,i],]))
+  LDA <- apply(1:nrow(data),2, function(i) lda(class ~ ., data=data[dane[i,],] ))
   tmp <- list(dane = dane)
   tmp$N <- N
   tmp$data <- data
   tmp$LDA <- LDA
-  tmp1 <- bagging.own.pred(tmp, data)
-  tmp$LDA.class <- tmp1$LDA.class
-  tmp$votes <- tmp1$votes
-  tmp$class <- tmp1$class
-  tmp$err <- tmp1$err
-  return(tmp)
+  # tmp1 <- bagging.own.pred(tmp, data)
+  # tmp$LDA.class <- tmp1$LDA.class
+  # tmp$votes <- tmp1$votes
+  # tmp$class <- tmp1$class
+  # tmp$err <- tmp1$err
+  return(LDA)
 }
 
 # Funkcja do przeprowadzania przewidywania za pomoca baggingu LDA
