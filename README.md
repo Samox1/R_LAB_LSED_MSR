@@ -13,7 +13,7 @@ LSED PLAN: <br />
 5. Drzewa klasyfikujące 1 (biblioteki: MASS, rpart, rpart.plot)
 6. Drzewa klasyfikujące 2 (biblioteki: MASS, rpart, rpart.plot)
 7. Zespoły klasyfikatorów (biblioteki: MASS, rpart, rpart.plot, Hmisc, adabag, randomForest) 
-<br /> <br />
+<br /> 
 MSR PLAN:
 1. Wprowadzenie do R
 2. Obsługa macierzy, tworzenie wykresów i losowanie danych
