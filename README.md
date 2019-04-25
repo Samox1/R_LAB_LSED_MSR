@@ -1,10 +1,10 @@
 # R_LAB_LSED_MSR
 Laboratoria z LSED i MSR (LSED - Laboratorium Statystycznej Eksploracji Danych; MSR - Zastosowanie pakietu R w statystyce medycznej)
 
-LSED: http://www.if.pw.edu.pl/~julas/LSED/
-MSR: http://www.if.pw.edu.pl/~paluch/MSR/msr.html
+LSED: http://www.if.pw.edu.pl/~julas/LSED/ <br />
+MSR: http://www.if.pw.edu.pl/~paluch/MSR/msr.html <br />
 
-LSED PLAN:
+LSED PLAN: <br />
 0. Wprowadzenie do R
 1. Dyskryminacja Fisherowska (biblioteki: MASS, scatterplot3d)
 2. LDA, QDA i naiwny Bayes (biblioteki: MASS, mvtnorm, klaR, e1071)
@@ -12,7 +12,7 @@ LSED PLAN:
 4. Metoda najbliższych sąsiadów (biblioteki: MASS, class)
 5. Drzewa klasyfikujące 1 (biblioteki: MASS, rpart, rpart.plot)
 6. Drzewa klasyfikujące 2 (biblioteki: MASS, rpart, rpart.plot)
-7. Zespoły klasyfikatorów (biblioteki: MASS, rpart, rpart.plot, Hmisc, adabag, randomForest)
+7. Zespoły klasyfikatorów (biblioteki: MASS, rpart, rpart.plot, Hmisc, adabag, randomForest) <br />
 
 MSR PLAN:
 1. Wprowadzenie do R
