@@ -1,5 +1,5 @@
 ### LSED - Zadanie 4 - LAB nr 5-6
-# Autor: Szymon Baczyñski
+# Autor: Szymon Baczyñski 270626
 
 rm(list=ls())
 library(MASS)
@@ -123,6 +123,7 @@ cat("\n"); print("--- Punkt nr 8 zadania ---")
 ACC_all <- lapply(1:length(tree_all_opt),function(i) CM.large(wina$class,predict(tree_all_opt[[i]], wina, type = "class"))["ACC"])
 plot(2:(length(tree_all_opt)+1), ACC_all, type="b", xlab = sprintf("Iloœæ u¿ytych zmiennych: 2 ~ %0.f", (length(tree_all_opt))+1), ylab = "Skutecznoœæ Optymalnych Drzew",pch=19, col="blue")
 axis(side=1, at=c(2:(length(tree_all_opt)+1)))
+title("Skutecznoœæ Optymalnych Drzew")
 print("Wyliczono skutecznoœci optymalnych drzew")
 
 N_diff <- sapply(1:length(tree_all),function(i) max(tree_all[[i]]$cptable[,"nsplit"]) - max(tree_all_opt[[i]]$cptable[,"nsplit"]))
@@ -130,5 +131,6 @@ plot(2:(length(tree_all_opt)+1), N_diff, type="b", xlab = sprintf("Iloœæ u¿ytych
 axis(side=1, at=c(2:(length(tree_all_opt)+1)))
 axis(side=2, at=seq(0, max(N_diff), by=5))
 text(2:(length(N_diff)+1),N_diff,label=N_diff, col = "blue", cex=0.8)
+title("Ró¿nica drzewa pe³nego i optymalnego")
 print("Wyliczono ró¿nice rozmiaru drzewa pe³nego i optymalnego")
 
