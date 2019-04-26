@@ -63,29 +63,29 @@ LDAbagging.own <- function(data, N) {
   dane <- replicate(N, sample(1:nrow(data), rep = T))
   # tworzenie drzew
   LDA <- lapply(1:N, function(i) lda(Species ~ ., data = data[dane[,i],], maxdepth = 1))
-  #tmp <- list(dane = dane)
-  #tmp$N <- N
-  #tmp$data <- data
-  #tmp$LDA <- LDA
-  # tmp1 <- bagging.own.pred(tmp, data)
+  tmp <- list(dane = dane)
+  tmp$N <- N
+  tmp$data <- data
+  tmp$LDA <- LDA
+   tmp1 <- bagging.own.pred(tmp, data)
   # tmp$LDA.Species <- tmp1$LDA.Species
   # tmp$votes <- tmp1$votes
   # tmp$Species <- tmp1$Species
   # tmp$err <- tmp1$err
-  return(LDA)
+  return(tmp)
 }
 
 # Funkcja do przeprowadzania przewidywania za pomoca baggingu LDA
 LDAbagging.own.pred <- function(bag, data) {
   tmp <- list()
   LDA.Species <- sapply(1:bag$N, function(i) predict(bag$LDA[[i]], data))
-  votes <- t(sapply(1:nrow(LDA.Species), function(i) table(factor(LDA.Species[i,], levels = levels(data$Species)))))
-  Species <- factor(levels(data$Species)[apply(votes, 1, which.max)], levels = levels(data$Species))
-  tmp$LDA.Species <- LDA.Species
-  tmp$votes <- votes
-  tmp$Species <- Species
-  tmp$err <- err.rate(data$Species, tmp$Species)
-  return(tmp)
+  # votes <- t(sapply(1:nrow(LDA.Species), function(i) table(factor(LDA.Species[i,], levels = levels(data$Species)))))
+  # Species <- factor(levels(data$Species)[apply(votes, 1, which.max)], levels = levels(data$Species))
+  # tmp$LDA.Species <- LDA.Species
+  # tmp$votes <- votes
+  # tmp$Species <- Species
+  # tmp$err <- err.rate(data$Species, tmp$Species)
+  # return(tmp)
 } 
 
 ### ----- Functions END ----- Functions END ----- Functions END ----- Functions END ----- ###
@@ -103,7 +103,7 @@ vals <- c(1, 2, 5, 10, 20, 50)
 
 # Wywo³anie algorytmu bagging dla ró¿nej liczby drzew dla PU (10 realizacji)
 tab <- sapply(vals, function(v) replicate(10, bagging.own(PU, v)$err))
-tabLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own(PU, v)$err))
+tabLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own(PU, v)))
 
 # Wywo³anie algorytmu bagging dla ró¿nej liczby drzew dla PT (10 realizacji)
 tab.new <- sapply(vals, function(v) replicate(10, bagging.own.pred(bagging.own(PU, v), PT)$err))
