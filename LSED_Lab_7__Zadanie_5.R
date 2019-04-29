@@ -67,7 +67,7 @@ LDAbagging.own <- function(data, N) {
   tmp$N <- N
   tmp$data <- data
   tmp$LDA <- LDA
-   tmp1 <- bagging.own.pred(tmp, data)
+  tmp1 <- bagging.own.pred(tmp, data)
   # tmp$LDA.Species <- tmp1$LDA.Species
   # tmp$votes <- tmp1$votes
   # tmp$Species <- tmp1$Species
