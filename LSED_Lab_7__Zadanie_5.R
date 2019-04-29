@@ -56,7 +56,7 @@ bagging.own.pred <- function(bag, data) {
   return(tmp)
 }
 
-# ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- #
+# ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- #
 # Funkcja do przeprowadzanie procedury bagging LDA
 LDAbagging.own <- function(data, N) {
   # Dane: losowanie z oryginalnej próby
@@ -78,23 +78,17 @@ LDAbagging.own <- function(data, N) {
 # Funkcja do przeprowadzania przewidywania za pomoca baggingu LDA
 LDAbagging.own.pred <- function(bag, data) {
   tmp <- list()
-  LDA.Species <- sapply(1:bag$N, function(i) predict(bag$LDA[[i]], data))
+  LDA.Species <- sapply(1:bag$N, function(i) predict(bag$LDA[[i]], data)$class)
   votes <- t(sapply(1:nrow(LDA.Species), function(i) table(factor(LDA.Species[i,], levels = levels(data$Species)))))
   Species <- factor(levels(data$Species)[apply(votes,1, which.max)], levels = levels(data$Species))
-  
-  LDASpecies <<- LDA.Species
-  k2 <<- votes
-  tmpSpecies <<- Species
-  
   tmp$LDA.Species <- LDA.Species
   tmp$votes <- votes
   tmp$Species <- Species
-  
-  #tmp$err <- err.rate(data$Species, tmp$Species)
+  tmp$err <- err.rate(data$Species, tmp$Species)
   return(tmp)
 }
 
-### ----- Functions END ----- Functions END ----- Functions END ----- Functions END ----- ###
+### ----- Functions END ----- Functions END ----- Functions END ----- Functions END ----- Functions END ----- ###
 
 
 data <- Irys[sample(nrow(Irys)),]
@@ -107,13 +101,23 @@ PT <- data[-(1:(bound_PU)),]
 # Liczba drzew/klasyfikatorów
 vals <- c(1, 2, 5, 10, 20, 50)
 
-# Wywo³anie algorytmu bagging dla ró¿nej liczby drzew dla PU (10 realizacji)
+# Wywo³anie algorytmu bagging dla ró¿nej liczby drzew/LDA dla PU (10 realizacji)
 tab <- sapply(vals, function(v) replicate(10, bagging.own(PU, v)$err))
 tabLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own(PU, v)$err))
 
+# Wywo³anie algorytmu bagging dla ró¿nej liczby drzew/LDA dla PT (10 realizacji)
+tab.new <- sapply(vals, function(v) replicate(10, bagging.own.pred(bagging.own(PU, v), PT)$err))
+tab.newLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own.pred(LDAbagging.own(PU, v), PT)$err))
 
-# Wywo³anie algorytmu bagging dla ró¿nej liczby drzew dla PT (10 realizacji)
-#tab.new <- sapply(vals, function(v) replicate(10, bagging.own.pred(bagging.own(PU, v), PT)$err))
-#tab.newLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own.pred(LDAbagging.own(PU, v), PT)$err))
 
+cat("\n")
+print("B³êdne klasyfikacje (œrednie): ")
+ALL <- colMeans(tab)
+ALL <- rbind(ALL,colMeans(tab.new))
+ALL <- rbind(ALL,colMeans(tabLDA))
+ALL <- rbind(ALL,colMeans(tab.newLDA))
+
+colnames(ALL) <- vals
+rownames(ALL) <- c("TREE PU|", "TREE PT|", "LDA  PU|", "LDA  PT|")
+print(ALL)
 
