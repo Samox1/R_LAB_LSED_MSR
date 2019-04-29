@@ -16,7 +16,7 @@ Irys = datasets::iris
 
 # colnames(Irys)[colnames(Irys)=="Species"] <- "Species"
 # Irys$Species <- ifelse((Irys$Species=="setosa"), 1, ifelse(Irys$Species=="versicolor", 2, 3))
-# Irys$Species <- factor(Irys$Species)
+Irys$Species <- factor(Irys$Species)
 
 
 # Wyznaczanie blêdu klasyfikatora
@@ -54,7 +54,7 @@ bagging.own.pred <- function(bag, data) {
   tmp$Species <- Species
   tmp$err <- err.rate(data$Species, tmp$Species)
   return(tmp)
-} 
+}
 
 # ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- LDA ----- #
 # Funkcja do przeprowadzanie procedury bagging LDA
@@ -62,16 +62,16 @@ LDAbagging.own <- function(data, N) {
   # Dane: losowanie z oryginalnej próby
   dane <- replicate(N, sample(1:nrow(data), rep = T))
   # tworzenie drzew
-  LDA <- lapply(1:N, function(i) lda(Species ~ ., data = data[dane[,i],], maxdepth = 1))
+  LDA <- lapply(1:N, function(i) lda(Species ~ ., data = data[dane[,i],]))
   tmp <- list(dane = dane)
   tmp$N <- N
   tmp$data <- data
   tmp$LDA <- LDA
-  tmp1 <- bagging.own.pred(tmp, data)
-  # tmp$LDA.Species <- tmp1$LDA.Species
-  # tmp$votes <- tmp1$votes
-  # tmp$Species <- tmp1$Species
-  # tmp$err <- tmp1$err
+  tmp1 <- LDAbagging.own.pred(tmp, data)
+  tmp$LDA.Species <- tmp1$LDA.Species
+  tmp$votes <- tmp1$votes
+  tmp$Species <- tmp1$Species
+  tmp$err <- tmp1$err
   return(tmp)
 }
 
@@ -79,14 +79,20 @@ LDAbagging.own <- function(data, N) {
 LDAbagging.own.pred <- function(bag, data) {
   tmp <- list()
   LDA.Species <- sapply(1:bag$N, function(i) predict(bag$LDA[[i]], data))
-  # votes <- t(sapply(1:nrow(LDA.Species), function(i) table(factor(LDA.Species[i,], levels = levels(data$Species)))))
-  # Species <- factor(levels(data$Species)[apply(votes, 1, which.max)], levels = levels(data$Species))
-  # tmp$LDA.Species <- LDA.Species
-  # tmp$votes <- votes
-  # tmp$Species <- Species
-  # tmp$err <- err.rate(data$Species, tmp$Species)
-  # return(tmp)
-} 
+  votes <- t(sapply(1:nrow(LDA.Species), function(i) table(factor(LDA.Species[i,], levels = levels(data$Species)))))
+  Species <- factor(levels(data$Species)[apply(votes,1, which.max)], levels = levels(data$Species))
+  
+  LDASpecies <<- LDA.Species
+  k2 <<- votes
+  tmpSpecies <<- Species
+  
+  tmp$LDA.Species <- LDA.Species
+  tmp$votes <- votes
+  tmp$Species <- Species
+  
+  #tmp$err <- err.rate(data$Species, tmp$Species)
+  return(tmp)
+}
 
 ### ----- Functions END ----- Functions END ----- Functions END ----- Functions END ----- ###
 
@@ -103,10 +109,11 @@ vals <- c(1, 2, 5, 10, 20, 50)
 
 # Wywo³anie algorytmu bagging dla ró¿nej liczby drzew dla PU (10 realizacji)
 tab <- sapply(vals, function(v) replicate(10, bagging.own(PU, v)$err))
-tabLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own(PU, v)))
+tabLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own(PU, v)$err))
+
 
 # Wywo³anie algorytmu bagging dla ró¿nej liczby drzew dla PT (10 realizacji)
-tab.new <- sapply(vals, function(v) replicate(10, bagging.own.pred(bagging.own(PU, v), PT)$err))
+#tab.new <- sapply(vals, function(v) replicate(10, bagging.own.pred(bagging.own(PU, v), PT)$err))
 #tab.newLDA <- sapply(vals, function(v) replicate(10, LDAbagging.own.pred(LDAbagging.own(PU, v), PT)$err))
 
 
