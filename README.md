@@ -8,13 +8,16 @@ MSR: http://www.if.pw.edu.pl/~paluch/MSR/msr.html <br />
 
 LSED PLAN: <br />
  0. Wprowadzenie do R
-1. Dyskryminacja Fisherowska (biblioteki: MASS, scatterplot3d)
-2. LDA, QDA i naiwny Bayes (biblioteki: MASS, mvtnorm, klaR, e1071)
-3. Ocena klasyfikatorów (biblioteki: Hmisc, MASS, klaR, e1071)
+1. Dyskryminacja Fisherowska    (biblioteki: MASS, scatterplot3d)
+2. LDA, QDA i naiwny Bayes      (biblioteki: MASS, mvtnorm, klaR, e1071)
+3. Ocena klasyfikatorów         (biblioteki: Hmisc, MASS, klaR, e1071)
 4. Metoda najbliższych sąsiadów (biblioteki: MASS, class)
-5. Drzewa klasyfikujące 1 (biblioteki: MASS, rpart, rpart.plot)
-6. Drzewa klasyfikujące 2 (biblioteki: MASS, rpart, rpart.plot)
-7. Zespoły klasyfikatorów (biblioteki: MASS, rpart, rpart.plot, Hmisc, adabag, randomForest) <br /> 
+5. Drzewa klasyfikujące 1       (biblioteki: MASS, rpart, rpart.plot)
+6. Drzewa klasyfikujące 2       (biblioteki: MASS, rpart, rpart.plot)
+7. Zespoły klasyfikatorów       (biblioteki: MASS, rpart, rpart.plot, Hmisc, adabag, randomForest) 
+8. Maszyny wektorów nośnych     (biblioteki: MASS, e1071) 
+9. Analiza skupień              (biblioteki: MASS)
+10. Analiza składowych głównych i skalowanie wielowymiarowe (biblioteki: kernlab) <br /> 
 
 MSR PLAN:
 1. Wprowadzenie do R
