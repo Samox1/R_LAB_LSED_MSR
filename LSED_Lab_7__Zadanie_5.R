@@ -1,5 +1,5 @@
 ### LSED - Zadanie 5 - LAB nr 7
-# Autor: Szymon Baczyñski
+# Autor: Szymon Baczyñski 270626
 
 # Polecenie:
 # Nale¿y zmodyfikowac funkcjê bagging.own() z przyk³adu tak, aby zamiast drzew decyzyjnych wykorzystaæ klasyfikator LDA. 
