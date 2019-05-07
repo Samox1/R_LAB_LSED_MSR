@@ -31,7 +31,8 @@ MSR PLAN:
 5. Testowanie hiptez statystycznych
 6. Testowanie zgodności z rozkładem, korelacje
 7. Dopasowanie parametrów rozkładu, jednoczynnikowa analiza wariancji
-8. Wielokrotna regresja liniowa, regresja logistyczna i regresja Poissona <br />
+8. Wielokrotna regresja liniowa, regresja logistyczna i regresja Poissona 
+9. Wieloczynnikowa i wielowymiarowa analiza wariancji<br />
 <br />
 
 TEXT PLAN:<br />
