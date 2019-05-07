@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="pl"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+    <title>Laboratorium TEXT - laboratorium 0</title>
+<style>
+  a.link {color:blue;}
+  a.visited {color:blue;}
+  a.hover {color:red;}
+  a.c.link {color:green;}
+
+  .c
+   {
+      text-decoration: none;
+      font-weight: bold;
+      font-family:"Thaoma";
+      font-size: 8pt;
+    }
+
+  .c1
+   {
+      text-decoration: none;
+      font-weight: bold;
+      font-family:"Thaoma";
+      font-size: 11pt;
+    }
+
+  .cm
+   {
+      font-weight: bold;
+      font-family:"Courier";
+      font-size: 9pt;
+    }
+</style></head>
+
+
+<body>
+ 
+<p align="center"><b><font size="5">Eksploracja Tekstu i Wyszukiwanie Informacji w Mediach Społecznościowych</font></b></p>
+<p align="center"><b><font size="4" color="orange">LABORATORIUM 0</font></b></p>
+
+<ul type="square">
+  <li><a class="c1" href="#start">Uruchamianie i kończenie sesji, komendy</a>: <a class="c" href="#p0.1">P0.1</a></li>
+  <li><a class="c1" href="#przyp">Instrukcja przypisania</a>: <a class="c" href="#p0.2">P0.2</a>, <a href="#p0.3" class="c">P0.3</a></li>
+  <li><a class="c1" href="#typy">Typy danych</a>
+    <ol>
+      <li><a class="c1" href="#typ.liczbowy">Typ liczbowy</a>: <a class="c" href="#p0.4">P0.4</a>
+      </li><li><a class="c1" href="#typ.znakowy">Typ znakowy</a>: <a class="c" href="#p0.5">P0.5</a>
+      </li><li><a class="c1" href="#typ.logiczny">Typ logiczny</a>: <a class="c" href="#p0.6">P0.6</a>
+      </li><li><a class="c1" href="#typ.czynnikowy">Typ czynnikowy</a>: <a class="c" href="#p0.7">P0.7</a>
+      </li><li><a class="c1" href="#typ.wektor">Wektor</a>: <a class="c" href="#p0.8">P0.8</a> <a class="c" href="#p0.9">P0.9</a>
+      </li><li><a class="c1" href="#typ.lista">Lista</a>: <a class="c" href="#p0.10">P0.10</a>
+      </li><li><a class="c1" href="#typ.macierz">Macierz</a>: <a class="c" href="#p0.11">P0.11</a> <a class="c" href="#p0.12">P0.12</a>
+      </li><li><a class="c1" href="#typ.ramka">Ramka danych</a>: <a class="c" href="#p0.13">P0.13</a>
+    </li></ol>
+  </li><li><a class="c1" href="#indeksy">Indeksy</a>: <a class="c" href="#p0.14">P0.14</a> <a class="c" href="#p0.15">P0.15</a> <a class="c" href="#p0.16">P0.16</a> 
+  </li><li><a class="c1" href="#operacje">Operacje na wektorach i macierzach</a> <a class="c" href="#p0.17">P0.17</a>
+  </li><li><a class="c1" href="#ster">Instrukcje sterujące</a>
+    <ol>
+      <li><a class="c1" href="#for">Pętla <font class="cm">for</font></a>: <a class="c" href="#p0.18">P0.18</a></li>
+      <li><a class="c1" href="#while">Pętla <font class="cm">while</font></a>: <a class="c" href="#p0.19">P0.19</a></li>
+      <li><a class="c1" href="#if">Instrukcja warunkowa <font class="cm">if ... else ...</font></a>: <a class="c" href="#p0.20">P0.20</a> <a class="c" href="#p0.21">P0.21</a></li>
+      <li><a class="c1" href="#ifelse">Instrukcja warunkowa <font class="cm">ifelse(...,...,...)</font></a>: <a class="c" href="#p0.22">P0.22</a></li>
+    </ol></li>
+  <li><a class="c1" href="#fun">Funkcje</a> <a class="c" href="#p0.23">P0.23</a> <a class="c" href="#p0.24">P0.24</a> <a class="c" href="#p0.25">P0.25</a></li>
+  <li><a class="c1" href="#skrypt">Wykonywanie skryptów</a> <a class="c" href="#test.R">test.R</a> <a class="c" href="#p0.26">P0.26</a></li>
+  <li><a class="c1" href="#wekt">Funkcje obsługi wektorów</a> <a class="c" href="#p0.27">P0.27</a> <a class="c" href="#p0.28">P0.28</a> <a class="c" href="#p0.29">P0.29</a> <a class="c" href="#p0.30">P0.30</a> <a class="c" href="#p0.31">P0.31</a> <a class="c" href="#p0.32">P0.32</a> <a class="c" href="#p0.33">P0.33</a></li>
+  <li><a class="c1" href="#mat">Funkcje obsługi macierzy</a> <a class="c" href="#p0.34">P0.34</a> <a class="c" href="#p0.35">P0.35</a> <a class="c" href="#p0.36">P0.36</a> <a class="c" href="#p0.37">P0.37</a> <a class="c" href="#p0.38">P0.38</a> <a class="c" href="#p0.39">P0.39</a></li>
+  <li><a class="c1" href="#plot">Tworzenie wykresów</a> <a class="c" href="#p0.40">P0.40</a> <a class="c" href="#p0.41">P0.41</a> <a class="c" href="#p0.42">P0.42</a> <a class="c" href="#p0.43">P0.43</a></li>
+  <li><a class="c1" href="#hist">Tworzenie histogramów</a> <a class="c" href="#p0.44">P0.44</a> <a class="c" href="#p0.45">P0.45</a> <a class="c" href="#p0.46">P0.46</a> <a class="c" href="#p0.47">P0.47</a></li>
+  <li><a class="c1" href="#draw">Losowanie wartości</a>
+    <ol>
+      <li><a class="c1" href="#sample">Funkcja <font class="cm">sample</font></a>: <a class="c" href="#p0.48">P0.48</a></li>
+      <li><a class="c1" href="#distr">Rozkłady prawdopodobieństw: </a><a class="c" href="#p0.49">P0.49</a> <a class="c" href="#p0.50">P0.50</a></li>
+     </ol>
+  </li>
+    <li><a class="c1" href="#file-in">Wczytywanie danych z pliku</a> <a class="c" href="#p0.51">P0.51</a> <a class="c" href="#p0.52">P0.52</a> <a class="c" href="#p0.53">P0.53</a></li>
+  
+  <li><a class="c1" href="#data-out">Zapisywanie danych do pliku</a> <a class="c" href="#p0.54">P0.54</a> <a class="c" href="#p0.55">P0.55</a></li>
+  <li><a class="c1" href="#reg">Regresja liniowa</a> <a class="c" href="#p0.56">P0.56</a> <a class="c" href="#p0.57">P0.57</a> <a class="c" href="#p0.58">P0.58</a></li>
+</ul>
+
+<br><br>
+
+<a id="start"><p align="center"><b><font size="4">URUCHAMIANIE I KOŃCZENIE SESJI, KOMENDY</font></b></p></a>
+<ul>
+	<li>R uruchamiamy instrukcją <font size="2" face="Courier"><b>R</b></font> z linii komend,</li>
+	<li>z programu wychodzimy komendą <font class="cm">quit()</font> lub <font class="cm">q()</font></li>
+	<li>komendy wpisujemy, kończąc klawiszem <font size="2" face="Courier"><b>Enter</b></font>,</li>
+	<li>średnik <font size="2" face="Courier"><b>;</b></font> rozdziela kolejne komendy w linii,</li>
+	<li>tekst wypisany w linii po znaku <font size="2" face="Courier"><b>#</b></font> jest niewidoczny
+<a id="p0.1"><p></p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.1</font></b><pre>&gt; 2+2
+[1] 4
+&gt; 3-3; cos(0)
+[1] 0
+[1] 1
+&gt; exp(0) # wartosc exp(0)
+[1] 1</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li><a id="p0.1">
+</a></ul><a id="p0.1">
+
+</a><a id="przyp"><p align="center"><b><font size="4">INSTRUKCJA PRZYPISANIA</font></b></p>
+ </a><ul><a id="przyp">
+	<li>istnieją trzy sposoby przypisania: <pre>= &lt;- -&gt;</pre></li>
+	</a><li><a id="przyp">w większości przypadków nie ma różnicy, którego operatora używamy
+</a><a id="p0.2"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.2</font></b><pre>a = 128
+a &lt;- 128
+a -&gt; 128</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li><a id="p0.2">
+	<li>operator <font size="2" face="Courier"><b>=</b></font> służy do podawania parametrów funkcji,</li>
+	</a><li><a id="p0.2">operator <font size="2" face="Courier"><b>&lt;-</b></font> ma wyższy priorytet, co ilustruje poniższy przykład:
+</a><a id="p0.3"><p></p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.3</font></b><pre>a &lt;- b &lt;- 128
+a = b = 128
+a -&gt; b -&gt; 128
+a = b &lt;- 128</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li><a id="p0.3">
+</a></ul><a id="p0.3">
+
+</a><a id="typy"><p align="center"><b><font size="4">TYPY DANYCH</font></b></p>
+
+</a><ol><a id="typy">
+</a><li><a id="typy"></a><p><a id="typy"></a><a id="typ.liczbowy"><b>TYP LICZBOWY</b></a></p><a id="typ.liczbowy">
+<ul>
+  <li>liczby całkowite i rzeczywiste</li>
+  <li>dozwolona notacja naukowa (np. <font size="2" face="Courier"><b>a &lt;- 2.3e3</b></font>)</li>
+  <li>separatorem dziesiętnym jest kropka,</li>
+  <li>oprócz tego symbole <font size="2" face="Courier"><b>NaN, Inf, -Inf</b></font>
+</li></ul>
+  </a><a id="p0.4"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.4</font></b><pre>&gt; 1/0
+[1] Inf
+&gt; exp(-Inf)
+[1] 0
+&gt; 0 * Inf
+[1] NaN
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+
+</a></li><li><p><a id="typ.znakowy"><b>TYP ZNAKOWY</b></a></p><a id="typ.znakowy">
+</a><ul><a id="typ.znakowy">
+<li>napisy (łańcuchy znaków)</li>
+</a><li><a id="typ.znakowy">rozpoczynają się i kończą znakiem <font size="2" face="Courier"><b>'</b></font> lub <font size="2" face="Courier"><b>"</b></font>
+</a><a id="p0.5"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.5</font></b><pre>&gt; a &lt;- "a"; a
+[1] "a"
+&gt; a &lt;- "Pakiet R"; a
+[1] "Pakiet R"
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li></ul><a id="p0.5">
+
+
+</a></li><li><p><a id="typ.logiczny"><b>TYP LOGICZNY</b></a></p><a id="typ.logiczny">
+</a><ul><a id="typ.logiczny">
+<li>reprezentuje logiczną prawdę (<font size="2" face="Courier"><b>TRUE</b></font> lub <font size="2" face="Courier"><b>T</b></font>) i fałsz (<font size="2" face="Courier"><b>FALSE</b></font> lub <font size="2" face="Courier"><b>F</b></font>)</li>
+</a><li><a id="typ.logiczny">w wyrażeniu arytmetycznym jest automatycznie konwertowany na liczby (odpowiednio (<font size="2" face="Courier"><b>1</b></font> i <font size="2" face="Courier"><b>0</b></font>)
+</a><a id="p0.6"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.6</font></b><pre>&gt; 1 == 0
+[1] FALSE
+&gt; ("a" == "a") * 2
+[1] 2
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li></ul><a id="p0.6">
+
+</a></li><li><p><a id="typ.czynnikowy"><b>TYP CZYNNIKOWY (WYLICZENIOWY, KATEGORYCZNY)</b></a></p><a id="typ.czynnikowy">
+</a><ul><a id="typ.czynnikowy">
+<li>przydatny do przechowywania wektorów wartości, występujących na kilku poziomach,</li>
+<li>zajmuje mniej pamięci niż odpowiadający mu typ znakowy,</li>
+</a><li><a id="typ.czynnikowy">konstruktor <font size="2" face="Courier"><b>factor()</b></font>
+</a><a id="p0.7"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.7</font></b><pre>&gt; wyksztalcenie &lt;- factor(c("podstawowe", "wyzsze", "srednie", "srednie", "wyzsze"))
+&gt; summary(wyksztalcenie)
+podstawowe    srednie     wyzsze 
+         1          2          2 
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li></ul><a id="p0.7">
+
+
+</a></li><li><p><a id="typ.wektor"><b>WEKTOR</b></a></p><a id="typ.wektor">
+<ul>
+<li>uporządkowany zbiór obiektów tego samego typu (wyjątek <font size="2" face="Courier"><b>NA</b></font> - brak wartości),</li>
+<li>podstawowy typ w języku R: operacje wykonywane na wektorach są możliwe najbardziej efektywne.</li>
+</ul>
+
+<p><u>Metody tworzenia wektorów:</u></p>
+</a><ul><a id="typ.wektor">
+<li>przypisanie,</li>
+<li>funkcja <font size="2" face="Courier"><b>c()</b></font> do tworzenia z pojedynczych elementów,</li>
+<li>podanie zakresu za pomocą <font size="2" face="Courier"><b>:</b></font> lub <font size="2" face="Courier"><b>seq()</b></font>,</li>
+</a><li><a id="typ.wektor">powtórzenie za pomoca <font size="2" face="Courier"><b>rep()</b></font>
+</a><a id="p0.8"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.8</font></b><pre>&gt; a &lt;- b
+&gt; a &lt;- c(2, 181, 3.5, 2); a
+[1]   2.0 181.0   3.5   2.0
+&gt; a &lt;- 1:10; a
+ [1]  1  2  3  4  5  6  7  8  9 10
+&gt; a &lt;- seq(2, 10, 2); a
+[1]  2  4  6  8 10
+&gt; a &lt;- rep(T, 10); a
+ [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE
+&gt; a &lt;- rep(seq(2,10,2), 3); a
+ [1]  2  4  6  8 10  2  4  6  8 10  2  4  6  8 10
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li></ul><a id="p0.8">
+Możliwe jest indeksowanie wektorów za pomocą nazw elementów:
+</a><a id="p0.9"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.9</font></b><pre>&gt; w &lt;- c(a=1, b=2, c=3)
+&gt; w[1]
+a 
+1 
+&gt; w['a']
+a 
+1 
+&gt; w["a"]
+a 
+1</pre></td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+
+</a></li><li><p><a id="typ.lista"><b>LISTA</b></a></p><a id="typ.lista">
+</a><ul><a id="typ.lista">
+<li>uprządkowany zbiór obiektów, ale <u>różnych</u> typów i <u>dowolnej</u> długości</li>
+</a><li><a id="typ.lista">konstruktor <font size="2" face="Courier"><b>list()</b></font>
+</a><a id="p0.10"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.10</font></b><pre>&gt; L &lt;- list(liczby = 1:10, tekst = c("a", "b", "c"), log = rep(T, 5))
+&gt; L
+$liczby
+ [1]  1  2  3  4  5  6  7  8  9 10
+
+$tekst
+[1] "a" "b" "c"
+
+$log
+[1] TRUE TRUE TRUE TRUE TRUE
+
+&gt; L$liczby
+ [1]  1  2  3  4  5  6  7  8  9 10
+&gt; L[2]
+$tekst
+[1] "a" "b" "c"
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li></ul><a id="p0.10">
+
+
+</a></li><li><p><a id="typ.macierz"><b>MACIERZ</b></a></p><a id="typ.macierz">
+</a><ul><a id="typ.macierz">
+<li>konstruktorem macierzy (2D) jest <font size="2" face="Courier"><b>matrix()</b></font>,</li>
+</a><a id="p0.11"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.11</font></b><pre>&gt; A &lt;- matrix(0, 2, 3); A
+     [,1] [,2] [,3]
+[1,]    0    0    0
+[2,]    0    0    0
+&gt; A &lt;- matrix(1:8, 4, 2); A
+     [,1] [,2]
+[1,]    1    5
+[2,]    2    6
+[3,]    3    7
+[4,]    4    8
+&gt; A &lt;- matrix(c("a", "b", "c", "d"),2,2); A
+     [,1] [,2]
+[1,] "a"  "c" 
+[2,] "b"  "d"
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a><li><a id="p0.11">w przypadku wielowymiarowych macierzy (D &gt; 2) korzystamy z konstruktora <font size="2" face="Courier"><b>array()</b></font>.
+</a><a id="p0.12"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.12</font></b><pre>&gt; A &lt;- array(1:27, dim = c(3,3,3)); A
+, , 1
+
+     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]   10   13   16
+[2,]   11   14   17
+[3,]   12   15   18
+
+, , 3
+
+     [,1] [,2] [,3]
+[1,]   19   22   25
+[2,]   20   23   26
+[3,]   21   24   27</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></a></li><a id="p0.12">
+</a></ul><a id="p0.12">
+
+</a></li><li><p><a id="typ.ramka"><b>RAMKA DANYCH (DATA FRAME)</b></a></p><a id="typ.ramka">
+</a><ul><a id="typ.ramka">
+<li>lista wektorów o tej samej długości,</li>
+<li>elementy w każdej kolumnie są tego samego typu,</li>
+<li>elementy w różnych kolumnach mogą być różnych typów,</li>
+<li>odwołanie tak jak do list lub tak jak do macierzy,</li>
+<li>bardzo często wykorzystywane jako podstawowy typ w różnych pakietach R (np. <font size="2" face="Courier"><b>ggplot2</b></font>) 
+</li></a><li><a id="typ.ramka">konstruktor <font size="2" face="Courier"><b>data.frame()</b></font>
+</a><a id="p0.13"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.13</font></b><pre>&gt; ramka &lt;- data.frame(liczby = 5:1, logiczne = T)
+&gt; ramka
+  liczby logiczne
+1      5     TRUE
+2      4     TRUE
+3      3     TRUE
+4      2     TRUE
+5      1     TRUE
+&gt; ramka$liczby
+[1] 5 4 3 2 1
+&gt; ramka[1]
+  liczby
+1      5
+2      4
+3      3
+4      2
+5      1
+&gt; ramka[1,]
+  liczby logiczne
+1      5     TRUE
+&gt; ramka[,2]
+[1] TRUE TRUE TRUE TRUE TRUE</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</a></li></ul><a id="p0.13">
+</a></li></ol><a id="p0.13">
+
+</a><a id="indeksy"><p align="center"><b><font size="4">INDEKSY</font></b></p>
+Korzystając z operatorów <font size="2" face="Courier"><b>c()</b></font> (względnie <font size="2" face="Courier"><b>c(-)</b></font>) oraz <font size="2" face="Courier"><b>:</b></font> możliwe jest wypisywanie zadanych części 
+</a><ul><a id="indeksy">
+</a><li><a id="indeksy">wektorów
+</a><a id="p0.14"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.14</font></b><pre>&gt; w &lt;- 1:10
+&gt; w[1:5]
+[1] 1 2 3 4 5
+&gt; w[-1]
+[1]  2  3  4  5  6  7  8  9 10
+&gt; w[c(1:4,8)]
+[1] 1 2 3 4 8
+&gt; w[c(-2,-5)]
+[1]  1  3  4  6  7  8  9 10
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></a></li><a id="p0.14">
+</a><li><a id="p0.14">macierzy
+</a><a id="p0.15"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.15</font></b><pre>&gt; M &lt;- matrix(1:9, 3, 3)
+&gt; M
+     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9
+&gt; M[1,] # pierwszy wiersz
+[1] 1 4 7
+&gt; M[,1] # pierwsza kolumna
+[1] 1 2 3
+&gt; M[1:2,] # dwa pierwsze wiersze
+     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+&gt; M[-1,] # bez pierwszego wiersza
+     [,1] [,2] [,3]
+[1,]    2    5    8
+[2,]    3    6    9
+&gt; M[-2,-2] # bez drugiego wiersza i drugiej kolumny
+     [,1] [,2]
+[1,]    1    7
+[2,]    3    9</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></a></li><a id="p0.15">
+</a><li><a id="p0.15">i ramek
+</a><a id="p0.16"><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.16</font></b><pre>&gt; ramka &lt;- data.frame(liczby = 5:1, logiczne = T)
+&gt; ramka
+  liczby logiczne
+1      5     TRUE
+2      4     TRUE
+3      3     TRUE
+4      2     TRUE
+5      1     TRUE
+&gt; ramka$liczby[1:2]
+[1] 5 4</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></a></li><a id="p0.16">
+</a></ul><a id="p0.16">
+
+</a><a id="operacje"><p align="center"><b><font size="4">OPERACJE NA WEKTORACH I MACIERZACH</font></b></p>
+</a><p><a id="operacje">Zdefiniujmy następujące wektory <font size="2" face="Courier"><b>w</b></font>, <font size="2" face="Courier"><b>u</b></font> i macierze <font size="2" face="Courier"><b>A</b></font>, <font size="2" face="Courier"><b>B</b></font>
+</a><a id="p0.17"></a></p><p><a id="p0.17">
+</a></p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.17</font></b><pre>&gt; w &lt;- c(1,2); w
+[1] 1 2
+&gt; v &lt;- c(3,4); v
+[1] 3 4
+&gt; A &lt;- matrix(1:4, 2, 2); A
+     [,1] [,2]
+[1,]    1    3
+[2,]    2    4
+&gt; B &lt;- matrix(4:1, 2, 2); B
+     [,1] [,2]
+[1,]    4    2
+[2,]    3    1</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table><a id="p0.17">
+<p></p>
+Możemy wykorzystać następujące operacje na wektorach
+<ul>
+  <li>dodawanie wektorów <font size="2" face="Courier"><b>w + v</b></font>,
+  </li><li>dodawanie liczby do wektora <font size="2" face="Courier"><b>w + 5</b></font>,
+  </li><li>możenie wektora przez liczbę <font size="2" face="Courier"><b>2 * w</b></font>,
+  </li><li>iloczyn skalarny wektorów <font size="2" face="Courier"><b>w %*% v</b></font><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><pre>&gt; w+v
+[1] 4 6
+&gt; 5+w
+[1] 6 7
+&gt; 2*w
+[1] 2 4
+&gt; w %*% v
+     [,1]
+[1,]   11
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></li>
+</ul>
+oraz na macierzach
+<ul>
+  <li>dodawanie macierzy <font size="2" face="Courier"><b>A + B</b></font>,
+  </li><li>dodawanie liczby do macierzy <font size="2" face="Courier"><b>1 + A</b></font>,
+  </li><li>możenie macierzy przez liczbę <font size="2" face="Courier"><b>2 * A</b></font>,
+  </li><li>transpozycja macierzy <font size="2" face="Courier"><b>t(A)</b></font>
+  </li><li>wyznacznik macierzy <font size="2" face="Courier"><b>det(A)</b></font>,
+  </li><li>iloczyn macierzy <font size="2" face="Courier"><b>A %*% B</b></font>,
+  </li><li>wartości i wektory własne macierzy <font size="2" face="Courier"><b>eigen(A)</b></font>,
+<p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><pre>&gt; A + B
+     [,1] [,2]
+[1,]    5    5
+[2,]    5    5
+&gt; 1 + A
+     [,1] [,2]
+[1,]    2    4
+[2,]    3    5
+&gt; 2 * A
+     [,1] [,2]
+[1,]    2    6
+[2,]    4    8
+&gt; t(A)
+     [,1] [,2]
+[1,]    1    2
+[2,]    3    4
+&gt; det(A)
+[1] -2
+&gt; A %*% B
+     [,1] [,2]
+[1,]   13    5
+[2,]   20    8
+&gt; eigen(A)
+$values
+[1]  5.3722813 -0.3722813
+
+$vectors
+           [,1]       [,2]
+[1,] -0.5657675 -0.9093767
+[2,] -0.8245648  0.4159736
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></li>
+</ul>
+
+</a><a id="ster"><p align="center"><b><font size="4">INSTRUKCJE STERUJĄCE</font></b></p></a>
+
+<ol>
+<li><p><a id="for"></a><b>PĘTLA <font class="cm">FOR</font></b></p>
+<a id="p0.18"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.18</font></b><pre>&gt; x &lt;- 1:10
+&gt; for(y in x) print(y)
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</li>
+<li><p><a id="while"></a><b>PĘTLA <font class="cm">WHILE</font></b></p>
+<a id="p0.19"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.19</font></b><pre>&gt; x &lt;- 1
+&gt; while(x &lt; 5) {
++ print(x)
++ x &lt;- x + 1
++ }
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</li>
+<li><p><a id="if"></a><b>INSTRUKCJA WARUNKOWA <font class="cm">IF...ELSE...</font></b></p>
+<a id="p0.20"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.20</font></b><pre>&gt; x &lt;- 5
+&gt; if(x &lt; 5) print(x) else print(x^2)
+[1] 25
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Warunek musi mieć długość równą 1, inaczej instrukcja warunkowa zostanie wykonana tylko dla pierwszego elementu
+<a id="p0.21"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.21</font></b><pre>&gt; x &lt;- 1:10
+&gt; if(x %% 3) print("Nie dzieli sie przez 3") else print("Dzieli sie przez 3")
+[1] "Nie dzieli sie przez 3"
+Warning message:
+In if (x%%3) print("Nie dzieli sie przez 3") else print("Dzieli sie przez 3") :
+  the condition has length &gt; 1 and only the first element will be used
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</li>
+<li><p><a id="ifelse"></a><b>INSTRUKCJA WARUNKOWA <font class="cm">IFELSE(WARUNEK, INSTRUKCJA1, INSTRUKCJA2)</font></b></p>
+<a id="p0.22"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.22</font></b><pre>&gt; x &lt;- 1:10
+&gt; ifelse(x %% 3, "Nie dzieli sie przez 3", "Dzieli sie przez 3")
+ [1] "Nie dzieli sie przez 3" "Nie dzieli sie przez 3" "Dzieli sie przez 3"    
+ [4] "Nie dzieli sie przez 3" "Nie dzieli sie przez 3" "Dzieli sie przez 3"    
+ [7] "Nie dzieli sie przez 3" "Nie dzieli sie przez 3" "Dzieli sie przez 3"    
+[10] "Nie dzieli sie przez 3"
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</li>
+</ol>
+
+<a id="fun"><p align="center"><b><font size="4">FUNKCJE</font></b></p></a>
+Schemat tworzenia funkcji jest następujący
+<p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><pre>nazwa_funkcji &lt;- function(x, y, ...) {
+...
+...
+return(wartosc)
+}
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Przykładem może być funkcja realizująca "tabliczkę mnożenia" dla dowolnych dwóch wektorów
+<a id="p0.23"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.23</font></b><pre>&gt; tabliczka_mnozenia &lt;- function(zakres1, zakres2) {
++ return(zakres1 %o% zakres2)
++ }
+&gt; tabliczka_mnozenia(1:10,1:10)
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]    1    2    3    4    5    6    7    8    9    10
+ [2,]    2    4    6    8   10   12   14   16   18    20
+ [3,]    3    6    9   12   15   18   21   24   27    30
+ [4,]    4    8   12   16   20   24   28   32   36    40
+ [5,]    5   10   15   20   25   30   35   40   45    50
+ [6,]    6   12   18   24   30   36   42   48   54    60
+ [7,]    7   14   21   28   35   42   49   56   63    70
+ [8,]    8   16   24   32   40   48   56   64   72    80
+ [9,]    9   18   27   36   45   54   63   72   81    90
+[10,]   10   20   30   40   50   60   70   80   90   100
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Instrukcja <font class="cm">return()</font> nie jest obligatoryjna - za wartość funkcji przyjmowana jest wartość wyznaczona w ostatniej jej linii
+<a id="p0.24"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.24</font></b><pre>&gt; dodaj &lt;- function(x, y) {
++ x*y
++ cos(x)
++ x+y
++ }
+&gt; dodaj(2,5)
+[1] 7
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Wszystkie wartości przekazane do funkcji są widoczne i zmieniane <u>lokalnie</u>. W przypadku potrzeby zmiany wartości zmiennej tak, aby była widoczna globalnie należy użyć operatora przypisania <font class="cm">&lt;&lt;-</font>
+<a id="p0.25"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.25</font></b><pre>&gt; f &lt;- function(x, y) {
++ x &lt;- x * 2
++ y &lt;&lt;- y * 2
++ }
+&gt; x &lt;- 2
+&gt; y &lt;- 2
+&gt; f(2,2)
+&gt; x
+[1] 2
+&gt; y
+[1] 4</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="skrypt"><p align="center"><b><font size="4">SKRYPTY</font></b></p></a>
+Skrypty w języku R uruchamiane są komendą <font class="cm">source("nazwa_pilku")</font>.
+ Oczywiście, w przypadku używania własnych funkcji, należy je 
+zdefiniować przed główną częścią skryptu, czyli po prostu na górze. W 
+odróżnieniu od linii komend, wypisanie na ekran trzeba ubrać w 
+odpowiednią funkcję <font class="cm">print()</font> lub <font class="cm">cat()</font>.
+<a id="test.R"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Plik test.R</font></b><pre># Funkcja 
+f &lt;- function(x, y) {
+  x &lt;- 2*x
+  y &lt;&lt;- 2*y
+}
+
+# Główna część skryptu
+
+x &lt;- 2
+y &lt;- 2
+
+print(x)
+print(y)
+x
+
+f(2,2)
+
+cat("x =",x,"\n")
+cat("y =",y,"\n")
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="p0.26"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.26</font></b><pre>&gt; source("test.R")
+[1] 2
+[1] 2
+x = 2 
+y = 4</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="wekt"><p align="center"><b><font size="4">FUNKCJE OBSŁUGI WEKTORÓW</font></b></p></a>
+Następujące funckcje są bardzo przydatne podczas obsługi danych w formacie wektorowym:
+<ul>
+  <li>średnia elementów wektora <font class="cm">mean()</font></li>
+  <li>odchylenie standardowe elementów wektora <font class="cm">sd()</font></li>
+  <li>odwrócenie kolejności elementów wektora <font class="cm">rev()</font></li>
+  <li>suma wszystkich elementów wektora <font class="cm">sum()</font></li>
+  <li>suma skumlowana wektora <font class="cm">cumsum()</font></li>
+  <li>iloczyn elementów wektora <font class="cm">prod()</font></li>
+  <li>skumulowany iloczyn elementów wektora <font class="cm">cumprod()</font></li>
+  <li>wartość minimalnego elementu wektora <font class="cm">min()</font></li>
+  <li>indeks minimalnego elementu wektora <font class="cm">which.min()</font></li>
+  <li>wartość maksymalnego elementu wektora <font class="cm">max()</font></li>
+  <li>indeks maksymalnego elementu wektora <font class="cm">which.max()</font>
+<a id="p0.27"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.27</font></b><pre>&gt; x &lt;- c(1:5,0,5:1)
+&gt; mean(x)
+[1] 2.727273
+&gt; sd(x)
+[1] 1.678744
+&gt; rev(x)
+ [1] 1 2 3 4 5 0 5 4 3 2 1
+&gt; sum(x)
+[1] 30
+&gt; cumsum(x)
+ [1]  1  3  6 10 15 15 20 24 27 29 30
+&gt; prod(x)
+[1] 0
+&gt; cumprod(x)
+ [1]   1   2   6  24 120   0   0   0   0   0   0
+&gt; min(x)
+[1] 0
+&gt; max(x)
+[1] 5
+&gt; which.min(x)
+[1] 6
+&gt; which.max(x)
+[1] 5</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Należy przy tym zwrócić uwagę, czy w wektorze nie występują elementy <font class="cm">NA</font> (brak wartości) - wtedy funkcje nie zwrócą oczekiwanego wyniku, chyba że zostanie zastosowana opcja <font class="cm">na.rm=TRUE</font>.
+<a id="p0.28"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.28</font></b><pre>&gt; y &lt;- c(1, NA, 2, 5, 7)
+&gt; sum(y)
+[1] NA
+&gt; mean(y)
+[1] NA
+&gt; sum(y, na.rm=T)
+[1] 15
+&gt; mean(y, na.rm=T)
+[1] 3.75</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></li>
+</ul>
+Również często wykorzystywanymi funkcjami są
+<ul>
+  <li><font class="cm">which()</font>, która podaje indeksy elementów spełniających określony warunek
+<a id="p0.29"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.29</font></b><pre>&gt; y &lt;- c(1, NA, 2, 5, 7)
+&gt; which(y &gt; 2)
+[1] 4 5
+&gt; which(y == 2)
+[1] 3
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+przy czym wywołanie komendy <font class="cm">which(y == NA)</font> wyświetli komunikat błedu. Aby poradzić sobie z symbolem <font class="cm">NA</font> oraz <font class="cm">NaN</font>, <font class="cm">+/-Inf</font> należy skorzystać z funkcji <font class="cm">is.na()</font>, <font class="cm">is.nan()</font>, <font class="cm">is.finite()</font> oraz <font class="cm">is.infinite()</font>. Do uzyskania indeksów znów używamy funkcji <font class="cm">which()</font>.
+<a id="p0.30"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.30</font></b><pre>&gt; z &lt;- c(0/0, NA, 1/0, -1/0, 10, 15)
+&gt; z
+[1]  NaN   NA  Inf -Inf   10   15
+&gt; z &lt;- c(0/0, NA, NA, 1/0, -1/0, 10, 15)
+&gt; z
+[1]  NaN   NA   NA  Inf -Inf   10   15
+&gt; is.na(z)
+[1]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
+&gt; is.nan(z)
+[1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+&gt; is.finite(z)
+[1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE
+&gt; is.infinite(z)
+[1] FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE
+&gt; which(is.infinite(z))
+[1] 4 5
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Należy też pamiętać, że niektóre wyniki można otrzymać bez uciekania się do funkcji <font class="cm">which()</font>, stosując po prostu warunki. Na przykład, jeżeli chcemy wypisać wszystkie elementy wektora <font class="cm">x</font> większe niż <font class="cm">3</font>, możemy postąpić dwojako
+<a id="p0.31"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.31</font></b><pre>&gt; x
+ [1] 1 2 3 4 5 0 5 4 3 2 1
+&gt; x[which(x &gt; 3)]
+[1] 4 5 5 4
+&gt; x[x &gt; 3]
+[1] 4 5 5 4
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</li>
+  <li><font class="cm">sort()</font>, porządkująca elementy rosnąco (przy zastosowaniu opcji <font class="cm">decreasing=TRUE</font>) - malejąco
+<a id="p0.32"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.32</font></b><pre>&gt; x &lt;- c(1:5,0,5:1)
+&gt; x
+ [1] 1 2 3 4 5 0 5 4 3 2 1
+&gt; sort(x)
+ [1] 0 1 1 2 2 3 3 4 4 5 5
+&gt; sort(x, decreasing=T)
+ [1] 5 5 4 4 3 3 2 2 1 1 0
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Dodanie opcji <font class="cm">index=TRUE</font> powoduje stworzenie listy, której pierwszej elementem (<font class="cm">x</font>) jest posortowany wektor, drugim zaś (<font class="cm">ix</font>) indeksy oryginalnych danych w posortowanym wektorze
+<a id="p0.33"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.33</font></b><pre>&gt; x.sort &lt;- sort(x, index=T)
+&gt; x.sort
+$x
+ [1] 0 1 1 2 2 3 3 4 4 5 5
+
+$ix
+ [1]  6  1 11  2 10  3  9  4  8  5  7
+
+&gt; x.sort$x
+ [1] 0 1 1 2 2 3 3 4 4 5 5
+&gt; x.sort$ix
+ [1]  6  1 11  2 10  3  9  4  8  5  7
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p></li>
+</ul>
+
+<a id="mat"><p align="center"><b><font size="4">FUNKCJE OBSŁUGI MACIERZY</font></b></p></a>
+Część powyższych funkcji można zastosować także do macierzy, przy czym w przypadku <font class="cm">which.min()</font> oraz <font class="cm">which.max()</font> konieczne jest użycie dodatkowo funkcji <font class="cm">arrayInd()</font> do określenia indeksów macierzy - w przeciwnym wypadku otrzymamy tylko indeks "wektorowy".
+<a id="p0.34"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.34</font></b><pre>&gt; A &lt;- matrix(1:16, 4, 4)
+&gt; A
+     [,1] [,2] [,3] [,4]
+[1,]    1    5    9   13
+[2,]    2    6   10   14
+[3,]    3    7   11   15
+[4,]    4    8   12   16
+&gt; sum(A)
+[1] 136
+&gt; mean(A)
+[1] 8.5
+&gt; sd(A)
+[1] 4.760952
+&gt; min(A)
+[1] 1
+&gt; max(A)
+[1] 16
+&gt; which.min(A)
+[1] 1
+&gt; which.max(A)
+[1] 16
+&gt; arrayInd(which.min(A), dim(A))
+     [,1] [,2]
+[1,]    1    1
+&gt; arrayInd(which.max(A), dim(A))
+     [,1] [,2]
+[1,]    4    4
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Aby wyznaczyć brzegowe wartości dla macierzy (np. sumę, średnią etc) wykorzystuje się funkcję <font class="cm">apply(macierz,liczba,funkcja)</font>, przy <font class="cm">liczba</font> określa, czy odnosimy się do wiersza (<font class="cm">1</font>), kolumny (<font class="cm">2</font>) itd.
+<a id="p0.35"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.35</font></b><pre>&gt; A
+     [,1] [,2] [,3] [,4]
+[1,]    1    5    9   13
+[2,]    2    6   10   14
+[3,]    3    7   11   15
+[4,]    4    8   12   16
+&gt; apply(A, 1, sum)
+[1] 28 32 36 40
+&gt; apply(A, 2, sum)
+[1] 10 26 42 58
+&gt; apply(A, 1, mean)
+[1]  7  8  9 10
+&gt; apply(A, 2, sd)
+[1] 1.290994 1.290994 1.290994 1.290994
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Zamiast wbudowanych funkcji można także wykorzystać funkcje zbudowane przez siebie
+<a id="p0.36"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.36</font></b><pre>&gt; sum.x2 &lt;- function(x) {
++ sum(x^2)
++ }
+&gt; apply(A, 1, sum.x2)
+[1] 276 336 404 480
+&gt; apply(A, 2, sum.x2)
+[1]  30 174 446 846
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Natomiast w celu zastosowania dowolnej funkcji do każdego elementu macierzy, należy użyć komendy <font class="cm">sapply()</font>
+<a id="p0.37"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.37</font></b><pre>&gt; sapply(A, sum.x2)
+ [1]   1   4   9  16  25  36  49  64  81 100 121 144 169 196 225 256
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Istnieje również możliwość stworzenia tzw. <i>funkcji anonimowej</i>, którą definiujemy w locie.
+<a id="p0.38"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.38</font></b><pre>&gt; a &lt;- 1:10
+&gt; sapply(a, function(x) {x^2 - 2})
+ [1] -1  2  7 14 23 34 47 62 79 98
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Funkcje <font class="cm">sapply()</font> można zagnieżdżać, tworząc alternatywę dla wielokrotnych pętli
+<a id="p0.39"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.39</font></b><pre>&gt; a &lt;- 1:10
+&gt; sapply(a, function(x) { sapply(rev(a), function(y) { x * y }) } )
+      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+ [1,]   10   20   30   40   50   60   70   80   90   100
+ [2,]    9   18   27   36   45   54   63   72   81    90
+ [3,]    8   16   24   32   40   48   56   64   72    80
+ [4,]    7   14   21   28   35   42   49   56   63    70
+ [5,]    6   12   18   24   30   36   42   48   54    60
+ [6,]    5   10   15   20   25   30   35   40   45    50
+ [7,]    4    8   12   16   20   24   28   32   36    40
+ [8,]    3    6    9   12   15   18   21   24   27    30
+ [9,]    2    4    6    8   10   12   14   16   18    20
+[10,]    1    2    3    4    5    6    7    8    9    10
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="plot"><p align="center"><b><font size="4">TWORZENIE WYKRESÓW</font></b></p></a>
+Standardową funkcją wykorzystywaną do tworzenia wykresów jest <font class="cm">plot(x,y)</font>, gdzie <font class="cm">x</font> i <font class="cm">y</font> są odpowiednio wektorami liczb.
+<a id="p0.40"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.40</font></b><pre>&gt; x &lt;- 1:10
+&gt; plot(x, x^2)
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_1.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Funkcja <font class="cm">plot()</font> ma pokaźny zestaw różnych opcji, przy czym najczęściej wykorzystywane to <font class="cm">xlab="..."</font> (tytuł osi X), <font class="cm">ylab="..."</font> (tytuł osi Y), <font class="cm">main="..."</font> (tytuł wykresu), <font class="cm">col="..."</font> (kolor punktów), <font class="cm">pch=...</font> (kształt punktów), <font class="cm">cex="..."</font> (rozmiar punktów), <font class="cm">font=...</font>
+ (typ czcionki osi: 1 - normalna, 2 - pogrubiona, 3 - kursywa, 4 - 
+pogrubiona kursywa). W przypadku nazw osi można wykorzystywać funkcję <font class="cm">expression()</font>, która koduje wyrażenia matematyczne i litery greckie (np. <font class="cm">^</font> to indeks górny, <font class="cm">[..]</font> - indeks dolny, itd.).
+<a id="p0.41"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.41</font></b><pre>&gt; x &lt;- 1:10
+&gt; plot(x, x^2, xlab="x", ylab=expression(f(xi)==x^2), col="red", 
+pch=19, font=2, font.lab=4, main="Wykres funkcji f(x)", font.main=3, cex=2)
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_2.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+W przypadku potrzeby zapisania wykresu do pliku należy skorzystać z jednej z komend <font class="cm">png()</font>, <font class="cm">jpeg()</font> czy <font class="cm">tiff()</font>, a następnie zamknąc strumień komendą <font class="cm">dev.off()</font>.
+<a id="p0.42"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.42</font></b><pre>&gt; png("fig2.png")
+&gt; plot(x, x^2, xlab="x", ylab=expression(f(xi)==x^2), col="red", 
+pch=19, font=2, font.lab=4, main="Wykres funkcji f(x)", font.main=3, cex=2)
+&gt; dev.off()
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Aby do istniejącego wykresu dodać kolejne serie danych należy użyć funkcji <font class="cm">points()</font> (dodawanie punktów), <font class="cm">lines()</font> (dodawanie linii) lub <font class="cm">abline()</font> (tworzenie prostych o zadanych współczynnikach kierunkowych np. <i>y = x + 2</i> <font class="cm">abline(a = 2, b = 1)</font> czy też prostych poziomych np. <i>y=10</i> <font class="cm">abline(h=10)</font> lub pionowych np <i>x=5</i> <font class="cm">abline(v=5)</font>. 
+<a id="p0.43"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.43</font></b><pre>&gt; plot(x, x^2, xlab="x", ylab=expression(f(xi)==x^2), col="red", pch=19, font=2, font.lab=4, main="Wykres funkcji f(x)", font.main=3, cex=2)
+&gt; points(x, 100-x^2, col="blue", pch=3, cex=1.5)
+&gt; lines(y &lt;- seq(1,10,0.01), 500*sin(5*y)*exp(-y), col="green", lwd=2)
+&gt; abline(h=60, v=6, lwd=2, col="gray", lty=2)
+&gt; abline(a=100, b=-10, lwd=3, lty=3, col="orange")
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_3.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="hist"><p align="center"><b><font size="4">TWORZENIE HISTOGRAMÓW</font></b></p></a>
+Najprostszą metodą tworzenia histogramu jest wykorzystanie funkcji <font class="cm">tabulate()</font>,
+ przy efektem jej działania jest zliczenie wartości całkowitych 
+zawartych w wektorze. W przypadku liczb rzeczywistych doknywane jest 
+zaokrąglenie w dół.
+<a id="p0.44"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.44</font></b><pre>&gt; y &lt;- c(0,0,1,2,3,1,2,3,4)
+&gt; tabulate(y)
+[1] 2 2 2 1
+&gt; y &lt;- c(0,0,1.1,1.9,2.1,2,3)
+&gt; tabulate(y)
+[1] 2 2 1
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+W przypadku histogramu 2D można posłużyć się funkcją <font class="cm">table()</font>, która stworzy dwuwymiarową tablicę współwystępowania wartości.
+<a id="p0.45"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.45</font></b><pre>&gt; df &lt;- data.frame(x=c(1,1,2,2,3,4,5), y=c(2,2,3,1,5,5,5))
+&gt; df
+  x y
+1 1 2
+2 1 2
+3 2 3
+4 2 1
+5 3 5
+6 4 5
+7 5 5
+&gt; table(df)
+   y
+x   1 2 3 5
+  1 0 2 0 0
+  2 1 0 1 0
+  3 0 0 0 1
+  4 0 0 0 1
+  5 0 0 0 1
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Jednak <i>klasyczną</i> funkcją odpwiedzialną za tworzenie histogramów jest <font class="cm">hist()</font>. Samo jej wywołanie daje efekt wyrysowania histogramu o zadanej liczbie przedziałów (binów).
+<a id="p0.46"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.46</font></b><pre>&gt; x &lt;- c(1,1,1,2,2,4,10)
+&gt; hist(x)
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_4.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+W pewnym sensie nawet ważniejszą rzeczą od samego wykresu jest zawartość
+ zmiennej, do której zostanie zapisany jego wynik. Otrzymamy z niej 
+informacje nie tylko o liczbie zliczeń (<font class="cm">$counts</font>), ale także o granicach binów (<font class="cm">$breaks</font>), ich środkach (<font class="cm">$mids</font>) jak również funkcji gęstości (<font class="cm">$density</font>).
+<a id="p0.47"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.47</font></b><pre>&gt; x &lt;- c(1,1,1,2,2,4,10)
+h &lt;- hist(x)
+&gt; h
+$breaks
+[1]  0  2  4  6  8 10
+
+$counts
+[1] 5 1 0 0 1
+
+$density
+[1] 0.35714286 0.07142857 0.00000000 0.00000000 0.07142857
+
+$mids
+[1] 1 3 5 7 9
+
+$xname
+[1] "x"
+
+$equidist
+[1] TRUE
+
+attr(,"class")
+[1] "histogram"
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="draw"><p align="center"><b><font size="4">LOSOWANIE WARTOŚCI</font></b></p></a>
+
+<ul>
+<li><p><a id="sample"></a><b>FUNKCJA <font class="cm">sample()</font></b></p>
+Za pomocą funkcji <font class="cm">sample(x)</font> można w pakiecie R uzyskać permutację oryginalnego zbioru (wektora <font class="cm">x</font>). W przypadku podania konkretnej liczby próbek, mniejszej niż rozmiar <font class="cm">x</font> elementy zostaną wylosowane bez zwracania. Wreszcie podanie opcji <font class="cm">replace=TRUE</font> umożliwi losowanie ze zwracaniem. Dodatkowo, podanie wektora <font class="cm">prob</font> daje możliwość sterowania prawdopodobieństwem wylosowania konkretnych elementów wektora <font class="cm">x</font>. Funkcja nie ogranicza się jedynie do typów liczbowych. 
+<a id="p0.48"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.48</font></b><pre>&gt; sample(1:3, 2)
+[1] 3 2
+&gt; sample(1:10, 2)
+[1] 7 3
+&gt; sample(1:10)
+ [1]  7  9  8  4  1  6  2  3 10  5
+&gt; sample(1:10, 4)
+[1]  2  1 10  7
+&gt; sample(1:10, 20, replace=TRUE)
+ [1] 10  8  7  6  4  7  7  9  3 10  8 10 10 10  5  7  1  8  4  5
+&gt; sample(1:3, 10, replace=TRUE, prob=c(0.1,0.8,0.1))
+ [1] 2 3 2 2 2 2 2 2 2 2
+&gt; sample(letters[1:3], 10, replace=TRUE)
+ [1] "c" "b" "b" "a" "a" "c" "b" "a" "b" "a"
+&gt; sample(c(0.1, 0.2, 0.3), 10, replace=TRUE)
+ [1] 0.2 0.1 0.3 0.2 0.1 0.1 0.3 0.1 0.2 0.3
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</li>
+<li><p><a id="distr"></a><b>ROZKŁADY PRAWDOPODOBIEŃSTW</b></p>
+W pakiecie R jest zaimplementowany cały zestaw standardowych rozkładów 
+prawdopodobieństw (rozkład Gaussa, dwumianowy etc), do których 
+odwołujemy się w ten sam sposób <font class="cm">r|p|d[nazwa]()</font>, gdzie <font class="cm">r</font> oznacza losowanie z rozkładu (np. <font class="cm">runif()</font> - losowanie liczby z rozkładu jednostajnego), <font class="cm">p</font> oznacza dystrybuantę (np. <font class="cm">pnorm(2, 0, 1.5)</font> - wartość dystrybuanty dla rozkładu normalnego o średniej 0 i odchyleniu 1.5 w punkcie 2), <font class="cm">d</font> - gęstość prawdopodobieństwa (np. <font class="cm">dexp(2, 0.1)</font> - gęstość prawdopodobieństwa dla rozkładu wykładniczego o parameterze 0.1 w punkcie 2), natomiast <font class="cm">nazwa</font> to nazwa odpowiedniej funkcji.
+<a id="p0.49"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.49</font></b><pre>&gt; plot(x, dnorm(x, 0, 0.5), ylim = c(0,1.5), pch=19)
+&gt; points(x, dnorm(x, 0, 1), pch=19, col="blue")
+&gt; points(x, dnorm(x, 0, 0.3), pch=19, col="green", t="o")
+&gt; lines(x, pnorm(x, 0, 0.3), col="red", lwd=2)
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_5.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="p0.50"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.50</font></b><pre>&gt; runif(10)
+ [1] 0.00493211 0.18367641 0.09259208 0.90221906 0.57730584 0.22754440
+ [7] 0.53991699 0.13277527 0.82626715 0.01824022
+&gt; runif(10, 5, 10)
+ [1] 6.847017 9.592424 5.454149 7.604548 8.064673 9.031370 7.543914 9.406332
+ [9] 7.549621 6.967361
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+</li>
+</ul>
+
+<a id="file-in"><p align="center"><b><font size="4">WCZYTYWANIE DANYCH Z PLIKU</font></b></p></a>
+
+Jedną z najczęściej wykorzystywanych funkcji do wczytywania danych z pliku jest <font class="cm">read.table()</font>,
+ tworząca z wczytanego zbioru ramkę danych. Oznacza to, że w pliku każda
+ linia powinna zawierać tyle samo pól, a poza tym każda kolumna musi 
+zawierać ten sam typ danych.
+<a id="f1"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Plik test1.dat</font></b><pre>1 "Patient 1" 2 0.5
+20 "Patient 10" 10 0.11111
+30 "No name" 1 0.99
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="p0.51"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.51</font></b><pre>&gt; df &lt;- read.table("test1.dat")
+&gt; df
+  V1         V2 V3      V4
+1  1  Patient 1  2 0.50000
+2 20 Patient 10 10 0.11111
+3 30    No name  1 0.99000
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+W przypadku, gdy chcemy nadać nazwy poszczególnym kolumnom ramki, podajemy opcję <font class="cm">read.table(col.names="...")</font>. Spacje w nazwach zostaną zastąpione kropkami.
+<a id="p0.52"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.52</font></b><pre>&gt; df &lt;- read.table("test1.dat", col.names=c("id", "name", "degree", "clust coeff"))
+&gt; df
+  id       name degree clust.coeff
+1  1  Patient 1      2     0.50000
+2 20 Patient 10     10     0.11111
+3 30    No name      1     0.99000
+&gt; df$degree
+[1]  2 10  1
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Inną opcją jest podanie nazw kolumn w samym pliku - jeśli w pierwszym 
+wierszu jest o jedno pole mniej niż w kolejnym, funkcja automatycznie 
+potraktuje pierwszą linię jako nazwy kolumn, natomiast pierwszą kolumnę 
+jako nazwy wierszy.
+<a id="test2"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Plik test2.dat</font></b><pre>name degree cluster
+1 "Patient 1" 2 0.5
+20 "Patient 10" 10 0.11111
+30 "No name" 1 0.99
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="p0.53"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.53</font></b><pre>&gt; df &lt;- read.table("test2.dat")
+&gt; df
+         name degree cluster
+1   Patient 1      2 0.50000
+20 Patient 10     10 0.11111
+30    No name      1 0.99000
+&gt; colnames(df)
+[1] "name"    "degree"  "cluster"
+&gt; rownames(df)
+[1] "1"  "20" "30"
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="data-out"><p align="center"><b><font size="4">ZAPISYWANIE DANYCH DO PLIKU</font></b></p></a>
+W przypadku macierzy oraz ramek danych odpowiednim sposobem zapisu danych jest użycie funkcji <font class="cm">write.table()</font>. W przypadku, gdy dane mają być "czyste" (bez nazw kolumn i wierszy), używamy opcji <font class="cm">write.table(col.names=F, row.names=F)</font>
+<a id="p0.54"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.54</font></b><pre>&gt; df &lt;- data.frame(x=1:3, names=c("Aaaa", "Bbbb", "Ccc"))
+&gt; df
+  x names
+1 1  Aaaa
+2 2  Bbbb
+3 3   Ccc
+&gt; write.table(df, "test4.dat")
+&gt; A &lt;- matrix(1:10, 2, 5)
+&gt; write.table(A, "test5.dat")
+&gt; write.table(A, "test5.dat", row.names=F, col.names=F)
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Istnieje bezpośrednia metoda, polegająca na zapisaniu zmiennej do pliku poprzez instrukcję <font class="cm">save()</font>. W ten sposób nie trzeba się zastanawiać nad formatem zapisu.
+<a id="p0.55"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.55</font></b><pre>&gt; a
+[[1]]
+[1] "1" "2" "3" "4" "5" "6" "7" "8"
+
+[[2]]
+[1] "a"     "cos"   "jakis"
+
+&gt; save(a, file="a")
+&gt; ls()
+[1] "a"    "A"    "aa"   "dane" "df"   "L"    "x"   
+&gt; rm(a)
+&gt; ls()
+[1] "A"    "aa"   "dane" "df"   "L"    "x"   
+&gt; a
+Error: object 'a' not found
+&gt; load("a")
+&gt; a
+[[1]]
+[1] "1" "2" "3" "4" "5" "6" "7" "8"
+
+[[2]]
+[1] "a"     "cos"   "jakis"
+
+</pre>
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+<a id="reg"><p align="center"><b><font size="4">REGRESJA LINIOWA</font></b></p></a>
+W wielu przypadkach interesuje nas wykonanie analizy regresji opracowywanych danych. W pakiecie R służy do tego funkcja <font class="cm">lm()</font>, przy czym specyficzny jest sposób wprowadzania formuły - w R wykorzystuje się symbol tyldy <font class="cm">~</font> do pokazania zależności pomiędzy zmiennymi (np. <font class="cm">y ~ x</font> oznacza zależność pomiędzy <font class="cm">x</font> i <font class="cm">y</font>. Poniżej generujemy zaburzoną losowo zależność liniową
+<a id="p0.56"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.56</font></b><pre>&gt; x &lt;- 1:20
+&gt; y &lt;- 2*x-2 + runif(length(x), -3, 3)
+&gt; x
+ [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+&gt; y
+ [1] -2.9533514  0.2321698  5.2192884  7.5458593  8.7547771 11.3795559
+ [7] 13.2345637 15.6031631 18.3817310 16.7632322 18.9254405 22.3293603
+[13] 23.7654302 26.9699065 25.2812426 30.8505703 29.7152427 33.7703004
+[19] 34.7156642 36.8997098
+&gt; plot(x, y)
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_6.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Wykonujemy regresję liniową i wynik procedury zapisujemy do zmiennej <font class="cm">xy.lm</font>. Po wywołaniu funkcji <font class="cm">summary()</font>
+ otrzymamy wszystkie interesujące nas wartości dotyczące regresji. 
+Bezpośrednie odwołanie do współczynników otrzymujemy poprzez pole <font class="cm">coefficients</font>, przy czym <font class="cm">coefficients[1]</font> to punkt przecięcia, a <font class="cm">coefficients[2]</font>, to współczynnik kierunkowy. Możemy następnie zapisać współcznniki i wyreślić prostą dopasowania.
+<a id="p0.57"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.57</font></b><pre>&gt; xy.lm &lt;- lm(y ~ x)
+&gt; summary(xy.lm)
+
+Call:
+lm(formula = y ~ x)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.4009 -0.9691  0.4542  1.2475  2.4212 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -1.49155    0.73606  -2.026   0.0578 .  
+x            1.93912    0.06145  31.558   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.585 on 18 degrees of freedom
+Multiple R-squared:  0.9822,    Adjusted R-squared:  0.9813 
+F-statistic: 995.9 on 1 and 18 DF,  p-value: &lt; 2.2e-16
+&gt; xy.lm$coefficients
+(Intercept)           x 
+  -1.491550    1.939118
+&gt; b &lt;- xy.lm$coefficients[1]
+&gt; a &lt;- xy.lm$coefficients[2]
+&gt; plot(x, y, pch=19)
+&gt; lines(x, a*x+b, col="red", lwd=3)
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_7.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+Podobną procedurę można przeprowadzić dla przetransformowanych zmiennych. Tutaj jest to "zrandomiznowana zależność" y ~ x<sup>-2</sup>.
+<a id="p0.58"></a><p>
+</p><table width="400" cellspacing="0" cellpadding="0" border="0">
+<tbody><tr><td bgcolor="blue">
+<table width="100%" cellspacing="1" cellpadding="4" border="0">
+<tbody><tr>
+<td bgcolor="#f0f0f0"><b><font size="2">Przykład 0.58</font></b><pre>&gt; x &lt;- c(1,2,5,10,20,50,100,200,500,1000)
+&gt; y &lt;- (x*(1+runif(length(x),-0.9,0.9)))^(-2)
+&gt; plot(x, y, log="xy")
+&gt; xy.lm &lt;- lm(log(y) ~ log(x))
+&gt; summary(xy.lm)
+
+Call:
+lm(formula = log(y) ~ log(x))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.1943 -0.9342 -0.2273  0.9106  1.5951 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.02597    0.63814   0.041    0.969    
+log(x)      -2.02940    0.15557 -13.045 1.13e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.089 on 8 degrees of freedom
+Multiple R-squared:  0.9551,    Adjusted R-squared:  0.9495 
+F-statistic: 170.2 on 1 and 8 DF,  p-value: 1.132e-06
+
+&gt; b &lt;- exp(xy.lm$coefficients[1])
+&gt; a &lt;- xy.lm$coefficients[2]
+&gt; plot(x, y, pch=19, log="xy")
+&gt; lines(x, b*x^a, col="red", lwd=3)
+</pre>
+<img src="Laboratorium%20TEXT%20-%20laboratorium%200_pliki/fig0_8.png">
+</td>
+</tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<p></p>
+
+
+
+
+</body></html>
