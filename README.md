@@ -31,7 +31,7 @@ MSR PLAN:
 7. Dopasowanie parametrów rozkładu, jednoczynnikowa analiza wariancji
 8. Wielokrotna regresja liniowa, regresja logistyczna i regresja Poissona <br />
 
-TEXT PLAN:
+TEXT PLAN:<br />
 0. wprowadzenie do pakietu R
 1. ggplot2, potoki oraz dplyr
 2. tidy text, tibble, zliczanie słów, gutenbergr
