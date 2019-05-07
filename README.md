@@ -1,10 +1,13 @@
-# LABORATORIA z R --> LSED oraz MSR
-Laboratoria z LSED i MSR <br />
+# LABORATORIA z R --> LSED oraz MSR oraz TEXT
+Laboratoria z LSED + MSR + TEXT <br />
 LSED - Laboratorium Statystycznej Eksploracji Danych <br />
 MSR - Zastosowanie pakietu R w statystyce medycznej <br />
+TEXT - Eksploracja Tekstu i Wyszukiwanie Informacji w Mediach Społecznościowych <br />
 
 LSED: http://www.if.pw.edu.pl/~julas/LSED/ <br />
 MSR: http://www.if.pw.edu.pl/~paluch/MSR/msr.html <br />
+TEXT: http://www.if.pw.edu.pl/~julas/TEXT/ <br />
+<br />
 
 LSED PLAN: <br />
  0. Wprowadzenie do R
@@ -18,6 +21,7 @@ LSED PLAN: <br />
 8. Maszyny wektorów nośnych     (biblioteki: MASS, e1071) 
 9. Analiza skupień              (biblioteki: MASS)
 10. Analiza składowych głównych i skalowanie wielowymiarowe (biblioteki: kernlab) <br /> 
+<br />
 
 MSR PLAN:
 1. Wprowadzenie do R
@@ -27,4 +31,18 @@ MSR PLAN:
 5. Testowanie hiptez statystycznych
 6. Testowanie zgodności z rozkładem, korelacje
 7. Dopasowanie parametrów rozkładu, jednoczynnikowa analiza wariancji
-8. Wielokrotna regresja liniowa, regresja logistyczna i regresja Poissona
+8. Wielokrotna regresja liniowa, regresja logistyczna i regresja Poissona <br />
+<br />
+
+TEXT PLAN:<br />
+0. wprowadzenie do pakietu R
+1. ggplot2, potoki oraz dplyr
+2. tidy text, tibble, zliczanie słów, gutenbergr
+3. ważenie termów, korpusy, macierz termów-dokumentów
+4. prawa lingwistyczne
+5. n-gramy
+6. analiza sentymentu I
+7. analiza sentymentu II
+8. modele tematyczne
+9. word2vec i GloVe
+10. dane on-line, API, analiza <br />
