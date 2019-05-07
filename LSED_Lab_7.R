@@ -1,5 +1,4 @@
 ### LSED - LAB nr 7
-# Autor: Szymon Baczyñski
 
 rm(list=ls())
 
