@@ -7,6 +7,7 @@ TEXT - Eksploracja Tekstu i Wyszukiwanie Informacji w Mediach Społecznościowyc
 LSED: http://www.if.pw.edu.pl/~julas/LSED/ <br />
 MSR: http://www.if.pw.edu.pl/~paluch/MSR/msr.html <br />
 TEXT: http://www.if.pw.edu.pl/~julas/TEXT/ <br />
+<br />
 
 LSED PLAN: <br />
  0. Wprowadzenie do R
@@ -20,6 +21,7 @@ LSED PLAN: <br />
 8. Maszyny wektorów nośnych     (biblioteki: MASS, e1071) 
 9. Analiza skupień              (biblioteki: MASS)
 10. Analiza składowych głównych i skalowanie wielowymiarowe (biblioteki: kernlab) <br /> 
+<br />
 
 MSR PLAN:
 1. Wprowadzenie do R
@@ -30,6 +32,7 @@ MSR PLAN:
 6. Testowanie zgodności z rozkładem, korelacje
 7. Dopasowanie parametrów rozkładu, jednoczynnikowa analiza wariancji
 8. Wielokrotna regresja liniowa, regresja logistyczna i regresja Poissona <br />
+<br />
 
 TEXT PLAN:<br />
 0. wprowadzenie do pakietu R
