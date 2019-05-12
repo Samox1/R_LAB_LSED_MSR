@@ -112,7 +112,8 @@ data.svm <- svm(class ~ x + y, type = "C-classification", data = data, cost = 10
 # Wypisywanie wektorów noœnych i wartoœci alfa
 print(with(data.svm, cbind(SV, coefs)))
 
-# Wyznaczenie wektora w w <- t(data.svm$SV) %*% data.svm$coefs
+# Wyznaczenie wektora w 
+w <- t(data.svm$SV) %*% data.svm$coefs
 b <- data.svm$rho
 
 xx <- -5:5
@@ -192,5 +193,5 @@ contour(xp, yp, M, add = T, levels = b-1, lwd = 2, col = ifelse(b < 0, "red", "b
 
 # Dodanie punktów
 points(data.radial[,1:2], col = kolor, cex = 2.5, pch = 19)
-text(data.radial[,1:2], labels = 1:nrow(data.radial), cex = 0.8, col = "white", font = 2) 
+text(data.radial[,1:2], labels = 1:nrow(data.radial), cex = 0.8, col = "white", font = 2)
 
