@@ -89,4 +89,4 @@ colnames(tab) <- vals
 rownames(tab) <- c("SVM", "LDA")
 print(tab)
 
-
+# ZROBIÆ: WYKRES SKUTECZNOŒCI !
