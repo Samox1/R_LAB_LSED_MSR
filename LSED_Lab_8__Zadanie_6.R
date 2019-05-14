@@ -62,8 +62,7 @@ data.svm <- svm(class ~ x + y, type = "C-classification", data = data, cost = 0.
 pred <- predict(data.svm, data)
 
 # Wyœwietlenie tablicy trafieñ SVM
-#print("SVM ACC:")
-#print(CM.large(pred, data$class))
+print(sprintf("LDA SVM dla C=0.01: %.2f ",CM.large(pred, data$class)))
 
 # LDA predykcja
 data.lda <- lda(class ~ ., data)
@@ -72,8 +71,8 @@ data.lda <- lda(class ~ ., data)
 pred.lda <- predict(data.lda, data)
 
 # Wyœwietlenie tablicy trafieñ LDA
-#print("LDA ACC:")
-#print(CM.large(pred.lda$class, data$class))
+print(sprintf("LDA ACC: %.2f ",CM.large(pred.lda$class, data$class)))
+cat("\n")
 
 
 SVM.predict <- function(C, data){
@@ -82,11 +81,15 @@ SVM.predict <- function(C, data){
   return(CM.large(pred, data$class))
 }
 
-vals <- c(0.001, 0.002, 0.003, 0.004, 0.005, 0.01, 0.02, 0.05, 0.1, 0.5, 1, 10, 50, 100)
+vals <- c(0.001, 0.002, 0.003, 0.004, 0.005, 0.01, 0.02, 0.05, 0.1, 0.5, 1, 10, 50, 100, 1000)
 tab <- sapply(vals, function(v) SVM.predict(v, data))
 tab <- rbind(tab, CM.large(pred.lda$class, data$class))
 colnames(tab) <- vals
 rownames(tab) <- c("SVM", "LDA")
 print(tab)
 
-# ZROBIÆ: WYKRES SKUTECZNOŒCI !
+# Zrobiæ: Wykres Skutecznoœci 
+plot(vals,tab[1,], log="x", xlab = "C", ylab = "Accuracy",type="b",col="red", pch = 19, cex = 1)
+title("Skutecznoœæ SVM w zale¿noœci od wartoœci C")
+
+
