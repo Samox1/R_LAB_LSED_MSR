@@ -46,19 +46,42 @@ irys3 <- apply(komb3, 2, function(v) kmeans(irys[,v], 3))
 irys4 <- apply(komb4, 2, function(v) kmeans(irys[,v], 3))
 
 # Przeliczenie skutecznoœci K-means
-ACC2 <- sapply(c(1:length(irys2)), function(v) CM.large(irys$Species, irys2[[v]]$cluster))
-ACC3 <- sapply(c(1:length(irys3)), function(v) CM.large(irys$Species, irys3[[v]]$cluster))
-ACC4 <- sapply(c(1:length(irys4)), function(v) CM.large(irys$Species, irys4[[v]]$cluster))
+ACC2 <- sapply(c(1:length(irys2)), function(v) round(CM.large(irys$Species, irys2[[v]]$cluster),4))
+ACC3 <- sapply(c(1:length(irys3)), function(v) round(CM.large(irys$Species, irys3[[v]]$cluster),4))
+ACC4 <- sapply(c(1:length(irys4)), function(v) round(CM.large(irys$Species, irys4[[v]]$cluster),4))
 
-# colnames(ACC2) <- 
-# rownames(tab) <- c("SVM", "LDA")
 
-funky <- function(k,x){
+funky <- function(k){
+  v <- c(1:ncol(k))             # Niestety pêtle nie lubi¹ jak siê zadaje: for(i in range(1:ncol(k)))
+  x <- c(1:nrow(k))             # Ten sam problem który spowodowa³ ¿e siedzia³em po³owê dnia, dlaczego nie uzyskiwa³em string'a d³u¿szego ni¿ "1+2", np. string'a = "1+2+3" itd.
+  s <- character(length = 0L)   # String który na pocz¹tku mia³ s = "" powodowa³ powstanie dodatkowego stringa z "" w docelowej tablicy
   
+  for(i in v){
+    buf <- character(length = 0L)
+    for(p in x){
+      ifelse(p==1,buf<-k[p,i],buf <- paste(buf,(k[p,i]), sep="+"))
+    }
+    s <- append(s, buf, after=length(s))
+  }
+
+  return(s)
 }
 
-print(ACC2)
-print(ACC3)
-print(ACC4)
+name2 <- funky(komb2)
+name3 <- funky(komb3)
+name4 <- funky(komb4)
 
+length(ACC3) = length(ACC2)
+length(ACC4) = length(ACC2)
+length(name3) = length(ACC2)
+length(name4) = length(ACC2)
+
+tab <- matrix(c(name2,ACC2,name3,ACC3,name4,ACC4), nrow=6, byrow=TRUE)
+tab[is.na(tab)] <- ""
+
+colnames(tab) <- c(" ","","","","","")
+rownames(tab) <- c("Przypadek 2:","ACCuracy: ", "Przypadek 3:", "ACCuracy: ", "Przypadek 4:", "ACCuracy: ")
+
+#print(tab)
+print(as.matrix(noquote(tab)))      # Dla ³adnego wyœwietlenia bez cudzys³owów
 
