@@ -62,7 +62,7 @@ data.svm <- svm(class ~ x + y, type = "C-classification", data = data, cost = 0.
 pred <- predict(data.svm, data)
 
 # Wyœwietlenie tablicy trafieñ SVM
-print(sprintf("LDA SVM dla C=0.01: %.2f ",CM.large(pred, data$class)))
+print(sprintf("SVM dla C=0.01: %.2f ",CM.large(pred, data$class)))
 
 # LDA predykcja
 data.lda <- lda(class ~ ., data)
@@ -73,7 +73,7 @@ pred.lda <- predict(data.lda, data)
 # Wyœwietlenie tablicy trafieñ LDA
 print(sprintf("LDA ACC: %.2f ",CM.large(pred.lda$class, data$class)))
 cat("\n")
-
+print("Porównanie SVM i LDA, dla ró¿nego C:")
 
 SVM.predict <- function(C, data){
   data.svm <- svm(class ~ x + y, type = "C-classification", data = data, cost = C, scale = F, kernel = "linear")
