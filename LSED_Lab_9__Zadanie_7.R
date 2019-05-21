@@ -55,8 +55,8 @@ ACC4 <- sapply(c(1:length(irys4)), function(v) round(CM.large(irys$Species, irys
 
 
 funky <- function(k){
-  v <- c(1:ncol(k))             # Niestety pêtle nie lubi¹ jak siê zadaje: for(i in range(1:ncol(k)))
-  x <- c(1:nrow(k))             # Ten sam problem, który spowodowa³ ¿e siedzia³em po³owê dnia, i dlaczego nie uzyskiwa³em string'a d³u¿szego ni¿ "1+2" czy "1+4, np. string'a = "1+2+3" itd.
+  v <- c(1:ncol(k))             # "range" doesn't work like in python... 
+  x <- c(1:nrow(k))             
   s <- character(length = 0L)   # String który na pocz¹tku mia³ s = "" powodowa³ powstanie dodatkowego stringa z "" w docelowej tablicy
   
   for(i in v){

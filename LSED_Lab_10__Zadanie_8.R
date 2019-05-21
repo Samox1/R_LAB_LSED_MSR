@@ -25,7 +25,8 @@ print("Nazwano kolumny wed³ug pliku pomocniczego")
 
 ### --- Punkt 3 - Analiza PCA --- ###
 cat("\n"); print("--- Punkt nr 3 zadania ---");
-print("Analiza PCA")
+print("Analiza PCA"); cat("\n")
+
 wina <- data.frame(wina)
 # Macierz kowariancji
 S <- cov(wina)
@@ -42,7 +43,7 @@ eSc <- eigen(Sc)
 
 # Wykonanie analizy sk³adowych glownych
 wina.pc <- princomp(~., cor=T, data=wina[,-1])
-kappa <- wina.pc$sdev
+
 sum_sdev <- 0.0
 # suma <- sapply(wina.pc$sdev, function(v) sum(v[1:v,]))
 
@@ -56,8 +57,17 @@ plot(sum_sdev, main="Skumulowane Odchylenie Standardowe", xlab="Liczba sk³adowyc
 axis(side=1, at=c(1:length(sum_sdev)))
 
 print("Odchylenie standardowe z PCA:")
-print(wina.pc$sdev)
+print(round(wina.pc$sdev,6));  cat("\n")
+print("Skumulowane odchylenie standardowe:")
+cat(sum_sdev); cat("\n\n")
+
+
+print("Narysowano wykresy dla sk³adowych 1 i 2 oraz 2 i 3")
 
 # Wykres we wspó³rzêdnych sk³adowych g³ównych
-plot(wina.pc$scores, xlim=c(-2,2), ylim=c(-2,2), xlab="Sk³adowa 1", ylab="Sk³adowa 2")
-title("Sk³adowe", cex.main=1.4) 
+plot(wina.pc$scores[,1:2], xlab="Sk³adowa 1", ylab="Sk³adowa 2")
+title("Sk³adowe 1 i 2", cex.main=1.4) 
+
+# Wykres we wspó³rzêdnych sk³adowych g³ównych
+plot(wina.pc$scores[,2:3], xlab="Sk³adowa 2", ylab="Sk³adowa 3")
+title("Sk³adowe 2 i 3", cex.main=1.4) 
