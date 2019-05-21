@@ -13,6 +13,8 @@
 
 rm(list=ls())
 library(MASS)
+library(gplots)
+
 
 CM.large <- function(org.class, pred.class) {
   CM <- table(org.class, pred.class)
@@ -28,7 +30,8 @@ animals <- cluster::animals
 colnames(animals) <- c("warm-blooded", "can fly", "vertebrate", "endangered", "live in groups", "have hair")
 
 heatmap(as.matrix(animals), col = c("red", "green"))
-
+heatmap.2(as.matrix(animals), col = c("red", "green"))
+print("Wykonano 2 wykresy HEATMAP")
 
 # PUNKT 2 - K-Means
 
