@@ -20,6 +20,10 @@ CM.large <- function(org.class, pred.class) {
   CM <- table(org.class, pred.class)
   # Skutecznoœæ klasyfikatora
   ACC <- sum(diag(CM)) / sum(CM)
+  if(ACC==0){
+    cat("\n"); print("Ups, ACC = 0")
+    print(CM)
+  }
   return(c(ACC = round(ACC,4), row.names = NULL))
 }
 
@@ -31,7 +35,7 @@ colnames(animals) <- c("warm-blooded", "can fly", "vertebrate", "endangered", "l
 
 heatmap(as.matrix(animals), col = c("red", "green"))
 heatmap.2(as.matrix(animals), col = c("red", "green"))
-print("Wykonano 2 wykresy HEATMAP")
+print("Wykonano 2 wykresy HEATMAP"); 
 
 # PUNKT 2 - K-Means
 
