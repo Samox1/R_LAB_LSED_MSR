@@ -21,7 +21,7 @@ CM.large <- function(org.class, pred.class) {
   # Skutecznoœæ klasyfikatora
   ACC <- sum(diag(CM)) / sum(CM)
   if(ACC==0){
-    cat("\n"); print("Ups, ACC = 0")
+    cat("\n"); print("Ups, ACC = 0 , dla jakiegoœ przypadku:")
     print(CM)
   }
   return(c(ACC = round(ACC,4), row.names = NULL))
