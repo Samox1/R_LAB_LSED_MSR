@@ -65,9 +65,9 @@ cat(sum_sdev); cat("\n\n")
 print("Narysowano wykresy dla sk³adowych 1 i 2 oraz 2 i 3")
 
 # Wykres we wspó³rzêdnych sk³adowych g³ównych
-plot(wina.pc$scores[,1:2], xlab="Sk³adowa 1", ylab="Sk³adowa 2")
+plot(wina.pc$scores[,1:2], col = as.factor(wina[,1]), xlab="Sk³adowa 1", ylab="Sk³adowa 2")
 title("Sk³adowe 1 i 2", cex.main=1.4) 
 
 # Wykres we wspó³rzêdnych sk³adowych g³ównych
-plot(wina.pc$scores[,2:3], xlab="Sk³adowa 2", ylab="Sk³adowa 3")
+plot(wina.pc$scores[,2:3], col = as.factor(wina[,1]), xlab="Sk³adowa 2", ylab="Sk³adowa 3")
 title("Sk³adowe 2 i 3", cex.main=1.4) 
