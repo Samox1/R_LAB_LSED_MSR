@@ -28,6 +28,8 @@ cat("\n"); print("--- Punkt nr 3 zadania ---");
 print("Analiza PCA"); cat("\n")
 
 wina <- data.frame(wina)
+# plot(wina[,2], wina[,3], pch=19, xlab="Test 1", ylab="Test 2")
+# plot(wina[,3], wina[,4], pch=19, xlab="Test 2", ylab="Test 3")
 # Macierz kowariancji
 S <- cov(wina)
 
@@ -51,7 +53,6 @@ for (i in c(1:length(wina.pc$sdev))){
   sum_sdev[i] <- sum(wina.pc$sdev[1:i])
 }
 
-
 # Wykreœlenie wariancji zwiaz¹nych ze sk³adowymi
 plot(sum_sdev, main="Skumulowane Odchylenie Standardowe", xlab="Liczba sk³adowych", ylab="Skumulowane Odchylenie standardowe",type="b", col="red" )
 axis(side=1, at=c(1:length(sum_sdev)))
@@ -60,7 +61,6 @@ print("Odchylenie standardowe z PCA:")
 print(round(wina.pc$sdev,6));  cat("\n")
 print("Skumulowane odchylenie standardowe:")
 cat(sum_sdev); cat("\n\n")
-
 
 print("Narysowano wykresy dla sk³adowych 1 i 2 oraz 2 i 3")
 
