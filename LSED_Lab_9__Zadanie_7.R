@@ -16,7 +16,7 @@ library(MASS)
 library(gplots)
 
 
-CM.large <- function(org.class, pred.class,printu) {
+CM.large <- function(org.class, pred.class,printu) {          # Zmienna "printu" = czy ma siê wyœwietlaæ "table" przy ACC=0
   CM <- table(org.class, pred.class)
   # Skutecznoœæ klasyfikatora
   ACC <- sum(diag(CM)) / sum(CM)
