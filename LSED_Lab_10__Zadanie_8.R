@@ -9,6 +9,7 @@
 rm(list=ls())
 library(MASS)
 
+start_time <- Sys.time()
 
 ### --- Punkt 1 - Wczytaæ dane --- ###
 cat("\n"); print("--- Punkt nr 1 zadania ---"); 
@@ -30,37 +31,26 @@ print("Analiza PCA"); cat("\n")
 wina <- data.frame(wina)
 # plot(wina[,2], wina[,3], pch=19, xlab="Test 1", ylab="Test 2")
 # plot(wina[,3], wina[,4], pch=19, xlab="Test 2", ylab="Test 3")
-# Macierz kowariancji
-S <- cov(wina)
 
-# Macierz korelacji
-Sc <- cor(wina)
-
-# Wyznaczenie wartoœci i wektorów w³asnych
-eS <- eigen(S)
-eSc <- eigen(Sc)
-
-# print(eS)
-# print(eSc)
 
 # Wykonanie analizy sk³adowych glownych
 wina.pc <- princomp(~., cor=T, data=wina[,-1])
 
-sum_sdev <- 0.0
-# suma <- sapply(wina.pc$sdev, function(v) sum(v[1:v,]))
-
-for (i in c(1:length(wina.pc$sdev))){
-  sum_sdev[i] <- sum(wina.pc$sdev[1:i])
-}
+# sum_sdev <- 0.0
+# for (i in c(1:length(wina.pc$sdev))){
+#   sum_sdev[i] <- sum(wina.pc$sdev[1:i])
+# }
+sum_test <- sapply(c(1:length(wina.pc$sdev)), function(v) sum(wina.pc$sdev[1:v]))
+suma <- sum(wina.pc$sdev)
 
 # Wykreœlenie wariancji zwiaz¹nych ze sk³adowymi
-plot(sum_sdev, main="Skumulowane Odchylenie Standardowe", xlab="Liczba sk³adowych", ylab="Skumulowane Odchylenie standardowe",type="b", col="red" )
-axis(side=1, at=c(1:length(sum_sdev)))
+plot(sum_test/suma, main="Znormalizowane Skumulowane Odchylenie Standardowe od Liczby Sk³adowych", xlab="Liczba sk³adowych", ylab="Znormalizowane Skumulowane Odchylenie standardowe",type="b", col="red" )
+axis(side=1, at=c(1:length(sum_test)))
 
 print("Odchylenie standardowe z PCA:")
 print(round(wina.pc$sdev,6));  cat("\n")
 print("Skumulowane odchylenie standardowe:")
-cat(sum_sdev); cat("\n\n")
+cat(sum_test); cat("\n\n")
 
 print("Narysowano wykresy dla sk³adowych 1 i 2 oraz 2 i 3")
 
@@ -71,3 +61,7 @@ title("Sk³adowe 1 i 2", cex.main=1.4)
 # Wykres we wspó³rzêdnych sk³adowych g³ównych
 plot(wina.pc$scores[,2:3], col = as.factor(wina[,1]), xlab="Sk³adowa 2", ylab="Sk³adowa 3")
 title("Sk³adowe 2 i 3", cex.main=1.4) 
+
+cat("\n"); print("Czas wykonania programu: ")
+end_time <- Sys.time()
+print(end_time-start_time)
