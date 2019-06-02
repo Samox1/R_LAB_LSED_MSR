@@ -18,12 +18,13 @@ rak.fit <- survfit(rak.surv~rx, data=rak)
 print(summary(rak.fit))
 print(ggsurvplot(rak.fit, data=rak, pval = TRUE))
 
+
+
 ### ------------------------------------------------------------------------------------------------------------------ ###
 # Zadanie punktowane: Dokoñcz analizê prze¿ycia dla danych ovarian. Zbadaj czy 
 # istnieje zale¿noœæ miêdzy funkcj¹ prze¿ycia a czynnikami age, resid.ds i ecog.ps.
 # Czynnik age nale¿y uprzednio zdyskretyzowaæ (wystarcz¹ dwie grupy, mo¿na zrobiæ histogram aby wybraæ punkt podzia³u).
 ### ------------------------------------------------------------------------------------------------------------------ ###
-
 
 age_hist <- hist(rak$age)
 rak.zadanie <- Surv(time=ovarian$futime, event=ovarian$fustat)

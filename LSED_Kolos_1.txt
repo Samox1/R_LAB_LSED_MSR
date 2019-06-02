@@ -1,0 +1,29 @@
+I. WCZYTANIE DANYCH (3 pkt)
+
+(1) Wczytaj dane dotycz±ce pogody [http://www.if.pw.edu.pl/~julas/LSED/file_pogoda.txt] (1 pkt)
+(2) W ostatniej kolumnie (kolumna "percip") znajduje warto¶æ opadu w mm - zamieñ j± na klasê: 1 dla warto¶ci 0.0, 2 dla warto¶ci powy¿ej. (1 pkt)
+(3) Ostateczna ramka danych nie powinna zawieraæ warto¶ci opadu a jedynie klasê. (1 pkt)
+
+II. METODA LDA ORAZ OCENA KLASYFIKATORÓW (10 pkt)
+
+(4) Wykonaj metodê LDA dla kolejno: dwóch pierwszych, trzech pierwszych etc kolumn ramki danych (2 pkt).
+(5) Oceñ skuteczno¶æ klasyfikatora poprzez powtórne podstawienie dla wszystkich powy¿ej wykonanych klasyfikatorów. (2 pkt)
+(6) Oblicz warto¶ci FPR oraz TPR dla ka¿dego klasyfikatora i nanie¶ je na krzyw± ROC. (3 pkt)
+
+III. DRZEWA (5 pkt)
+
+(7) Stwórz pe³ne drzewo klasyfikacyjne na bazie ca³ej ramki danych (1 pkt)
+(8) Wyznacz optymaln± warto¶æ parametru cp i przytnij drzewo (2 pkt)
+(9) Narysuj przyciête drzewo (1 pkt)
+(10) Oblicz skuteczno¶æ przyciêtego drzewa (1 pkt)
+
+IV. PODUSMOWANIE (2 pkt)
+
+(11) Wyeksportuj rysunki (6) i (9) do plików PNG. (1 pkt)
+(12) Podaj która metoda (LDA czy DRZEWO) da³a lepsze rezultaty pod wzglêdem skuteczno¶ci. (1 pkt)
+
+Mail z wynikami zadania powinien zawieraæ:
+(1) kod ¼ród³owy wszystkich operacji jako za³±cznik,
+(2) rysunki wspomniane w pkt (11) jako za³±cznik,
+(3) opis z pkt (12) w tre¶ci maila.
+

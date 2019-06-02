@@ -1,0 +1,29 @@
+I. WCZYTANIE DANYCH (3 pkt)
+
+(1) Wczytaj dane dotycz±ce cytowañ [http://www.if.pw.edu.pl/~julas/LSED/file_sciento.txt] (1 pkt)
+(2) W ostatniej kolumnie (kolumna "cit") znajduje liczba cytowañ - zamieñ j± na klasê: 2 dla wartosci powy¿ej 20, 1 dla warto¶ci poni¿ej. (1 pkt)
+(3) Ostateczna ramka danych nie powinna zawieraæ warto¶ci cytowañ, a jedynie klasê. (1 pkt)
+
+II. METODA SVM ORAZ OCENA KLASYFIKATORÓW (9 pkt)
+
+(4) Wykonaj metode SVM (j±dro liniowe, koszt 100) dla kolejno: dwóch pierwszych, trzech pierwszych etc kolumn ramki danych (3 pkt).
+(5) Oceñ skuteczno¶æ klasyfikatora poprzez powtórne podstawienie dla wszystkich powy¿ej wykonanych klasyfikatorów. (3 pkt)
+(6) Wykre¶l wartosci z poprzedniego punktu w funkcji liczby u¿ytych zmiennych. (3 pkt)
+
+III. ANALIZA SK£ADOWYCH G£ÓWNYCH (4 pkt)
+
+(7) Wykonaj PCA (dla kowariancji) na ramce danych (pomiñ klasê) (1 pkt)
+(8) Wkre¶l unormowan± skumulowan± wariancjê (1 pkt)
+(9) Wyznacz wektor ³adunków (1 pkt)
+(10) Okresl liczbê sk³adowych g³ównych, ktore s± wystarczaj±ce do opsiu uk³adu (1 pkt)
+
+IV. PCA + SVM (4 pkt)
+
+(11) Wykonaj metodê SVM [tak jak w punkcie (4)] na wybranych w poprzednim punkcie sk³adowych g³ównych. (2 pkt)
+(12) Oceñ skuteczno¶æ takiego klasyfikatora i porównaj z warto¶ciami otrzymanymi w pkt (5). (2 pkt)
+
+Mail z wynikami zadania powinien zawieraæ:
+(1) kod ¼ród³owy wszystkich operacji jako za³±cznik,
+(2) rysunki wspomniane w pkt (6) i (8) jako za³±cznik,
+(3) opis z pkt (10) i (12) w tre¶ci maila.
+
