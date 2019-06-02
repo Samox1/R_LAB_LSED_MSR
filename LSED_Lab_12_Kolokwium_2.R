@@ -33,7 +33,7 @@ SVM_Predict <- lapply(cyt_SVM, function(v) predict(v,cytowanie))
 SVM_ACC <- sapply(SVM_Predict, function(v) CM.large(v,cytowanie$class))
 print(SVM_ACC)
 # Punkt 2.3 (6)
-plot(c(2:(ncol(cytowanie)-1)), SVM_ACC, main="Skutecznoœæ w zale¿noœci od zmiennych",xlab="Iloœæ u¿ytych zmiennych", ylab="Skutecznoœæ", ylim = c(0,1), pch=19, type = "b")
+plot(c(2:(ncol(cytowanie)-1)), SVM_ACC, main="Skutecznoœæ w zale¿noœci od zmiennych",xlab="Iloœæ u¿ytych zmiennych", ylab="Skutecznoœæ", ylim = c(0,1), type = "b")
 
 # Punkt 3
 # Punkt 3.1 (7)
@@ -54,7 +54,8 @@ print("Wed³ug wykresu Unormowanej Skumulowanej Wariancji - do opisu uk³adu wysta
 # Punkt 4.1 (11)
 SVM_4 <- svm(cytowanie[,ncol(cytowanie)] ~ ., type = "C-classification", data = cytowanie[,1:3], cost = 100, scale = F, kernel = "linear")
 SVM_4_Predict <- predict(SVM_4,cytowanie)
-cat(c("ACC dla wybranej wartoœci zmiennych SVM[1:3]: ", CM.large(SVM_4_Predict,cytowanie$class)))
+# Punkt 4.2 (12)
+cat(c("ACC dla wybranej wartoœci zmiennych SVM[1:3]: ", CM.large(SVM_4_Predict,cytowanie$class), "\n"))
 for(i in 1:length(SVM_ACC)+1){
   napis <- paste("ACC dla SVM[1:",i,"]: ", sep="")
   if(SVM_ACC[i-1]==max(SVM_ACC)){
