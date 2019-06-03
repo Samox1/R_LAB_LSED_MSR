@@ -31,6 +31,7 @@ cyt_SVM <- lapply(c(2:(ncol(cytowanie)-1)), function(v) svm(cytowanie[,ncol(cyto
 # Punkt 2.2 (5)
 SVM_Predict <- lapply(cyt_SVM, function(v) predict(v,cytowanie))
 SVM_ACC <- sapply(SVM_Predict, function(v) CM.large(v,cytowanie$class))
+names(SVM_ACC) <- c(2:9)
 print(SVM_ACC)
 # Punkt 2.3 (6)
 plot(c(2:(ncol(cytowanie)-1)), SVM_ACC, main="Skutecznoœæ w zale¿noœci od zmiennych",xlab="Iloœæ u¿ytych zmiennych", ylab="Skutecznoœæ", ylim = c(0,1), type = "b")
