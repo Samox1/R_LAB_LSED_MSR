@@ -1,0 +1,52 @@
+
+Zastosowanie pakietu R w statystyce medycznej
+
+KOLOKWIUM
+
+
+Podczas zajêæ bêdzie wykorzystywany zbiór danych |Sacramento| z
+biblioteki |caret|. Zbiór _nale¿y_ pobraæ bezpo¶rednio ze strony
+http://www.if.pw.edu.pl/~paluch/MSR/data/sacramento_caret.txt. Zadanie
+polega na wykonaniu analizy zbioru obejmuj±cej:
+
+ 1.
+
+    *(2 pkt.)* Sprawdzenie czy w zbiorze wystêpuj± brakuj±ce obserwacje
+    i ile ich jest. Imputacjê sztucznych pomiarów w miejsce brakuj±cych.
+
+ 2.
+
+    *(1 pkt.)* Stworzenie ramki danych zawieraj±cej ¶redni± i odchylenie
+    standardowe dla ka¿dej kolumny liczbowej w zbiorze.
+
+ 3.
+
+    *(2 pkt.)* Wykonanie rysunków pude³kowych dla zmiennych |beds|,
+    |baths|, |price|, |sqft| pogrupowanych ze wzglêdu na zmienn± |type|.
+
+ 4.
+
+    *(2 pkt.)* Wykonanie histogramu dla ka¿dej zmiennej liczbowej z tabeli.
+
+ 5.
+
+    *(12 pkt)* Zbudowanie wieloczynnikowej regresji liniowej
+    przewiduj±cej cenê mieszkania w oparciu o te dane.
+
+     1.
+
+        Nale¿y okre¶liæ (dowoln± sensown± metod±), które zmienne
+        istotnie wp³ywaj± na cenê mieszkania.
+
+     2.
+
+        Wskazane jest obliczenie dok³adno¶ci modelu przy pomocy
+        walidacji krzy¿owej.
+
+
+W nawiasach podano *maksymaln±* liczbê punktów jak± mo¿na zdobyæ za dane
+zadanie. Dodatkowy *1 pkt.* mo¿na otrzymaæ za przejrzysty, optymalny kod
+napisany zgodnie z zasadami jêzyka R. Skoñczony skrypt (z wyczerpuj±cymi
+komentarzami) nale¿y wys³aæ na adres robert.paluch@pw.edu.pl
+<mailto:robert.paluch@pw.edu.pl> przed wyj¶ciem z sali.
+
